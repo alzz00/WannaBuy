@@ -1,0 +1,166 @@
+<!doctype html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=390, initial-scale=1">
+<title>İstekler</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,100..900&family=Inter+Tight:wght@400;500;700;800&display=swap&subset=latin-ext" rel="stylesheet">
+<style>
+:root{
+  --paper:#F3F2EE;
+  --ink:#0E0E0E;
+  --ink2:#4A4A48;
+  --mute:#6B6B68;
+  --hair:rgba(14,14,14,.16);
+  --sig:#E4380E;
+  --f:"Archivo","Inter Tight",sans-serif;
+  --m:20px;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{width:390px;height:844px;margin:0;overflow:hidden}
+body{position:relative;background:var(--paper);color:var(--ink);font-family:var(--f);-webkit-font-smoothing:antialiased;font-feature-settings:"tnum" 1}
+
+.status{position:absolute;top:0;left:0;right:0;height:54px;display:flex;align-items:center;justify-content:space-between;padding:6px 26px 0 34px}
+.time{font-weight:650;font-size:16px}
+
+.head{position:absolute;top:58px;left:var(--m);right:var(--m)}
+.bar{height:6px;background:var(--ink)}
+h1{padding-top:16px;font-weight:900;font-stretch:125%;font-size:66px;line-height:.8;letter-spacing:-.04em;margin-left:-2px}
+
+/* total: label in col A, oversized figure in col B */
+.total{position:absolute;top:164px;left:var(--m);right:var(--m);display:grid;grid-template-columns:116px 1fr;align-items:end}
+.total small{font-weight:800;font-size:12px;letter-spacing:.12em;text-transform:uppercase;padding-bottom:4px;line-height:1.5}
+.total small i{display:block;font-style:normal;font-weight:500;letter-spacing:.04em;text-transform:none;font-size:14px;color:var(--ink2)}
+.total b{font-weight:900;font-stretch:112%;font-size:50px;line-height:.8;letter-spacing:-.035em;color:var(--sig);white-space:nowrap}
+
+/* filter */
+.filt{position:absolute;top:236px;left:var(--m);right:var(--m);height:46px;display:grid;grid-template-columns:.8fr .9fr .7fr 1.2fr;border-top:2px solid var(--ink);border-bottom:2px solid var(--ink)}
+.filt a{display:flex;align-items:center;justify-content:center;font-weight:700;font-size:16px;color:var(--ink);text-decoration:none}
+.filt a + a{border-left:1px solid var(--hair)}
+.filt a.on{background:var(--ink);color:var(--paper);margin:-2px 0}
+
+/* list */
+.list{position:absolute;top:298px;left:var(--m);right:var(--m);list-style:none}
+.list li{display:grid;grid-template-columns:116px 1fr;height:104px;align-items:center}
+.list li + li{border-top:1px solid var(--hair)}
+.pic{width:76px;height:76px;color:var(--ink)}
+.txt{display:grid;grid-template-columns:1fr auto;row-gap:10px;align-items:baseline}
+.nm{font-size:18px;font-weight:600;letter-spacing:-.005em;white-space:nowrap}
+.pr{font-weight:850;font-stretch:112%;font-size:22px;letter-spacing:-.02em;text-align:right}
+.st{font-weight:700;font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--ink2)}
+.pri{display:flex;align-items:center;gap:7px;font-weight:600;font-size:13px;justify-self:end}
+.pri::before{content:"";width:10px;height:10px;background:var(--sig)}
+.pri.wait{color:var(--mute)}
+.pri.wait::before{background:transparent;box-shadow:inset 0 0 0 1.6px var(--mute)}
+
+.tabs{position:absolute;left:var(--m);right:var(--m);bottom:34px;height:58px;display:grid;grid-template-columns:1fr 1fr;border-top:2px solid var(--ink)}
+.tabs a{position:relative;display:flex;align-items:center;gap:10px;text-decoration:none;color:var(--mute);font-weight:700;font-size:16px}
+.tabs a + a{padding-left:16px;border-left:1px solid var(--hair)}
+.tabs a.on{color:var(--ink)}
+.tabs a.on::before{content:"";position:absolute;left:0;right:0;top:-2px;height:6px;background:var(--sig)}
+.home{position:absolute;bottom:8px;left:50%;width:134px;height:5px;margin-left:-67px;border-radius:3px;background:var(--ink)}
+</style>
+</head>
+<body>
+
+<div class="status">
+  <span class="time">9:41</span>
+  <svg width="74" height="14" viewBox="0 0 74 14" fill="none">
+    <g fill="#0E0E0E"><rect x="1" y="9" width="2.4" height="3.6"/><rect x="5.2" y="6.6" width="2.4" height="6"/><rect x="9.4" y="4.2" width="2.4" height="8.4"/><rect x="13.6" y="1.6" width="2.4" height="11"/></g>
+    <g stroke="#0E0E0E" stroke-width="1.5" stroke-linecap="round"><path d="M28.2 9.6a3.3 3.3 0 0 1 4.6 0"/><path d="M25.7 7.1a6.8 6.8 0 0 1 9.6 0"/><path d="M23.2 4.6a10.3 10.3 0 0 1 14.6 0"/></g>
+    <circle cx="30.5" cy="12" r="1.1" fill="#0E0E0E"/>
+    <rect x="45.5" y="1.8" width="24" height="10.6" rx="2.6" stroke="#0E0E0E" stroke-width="1"/>
+    <rect x="47.5" y="3.8" width="17" height="6.6" rx="1.2" fill="#0E0E0E"/>
+    <path d="M71.6 5.6v3" stroke="#0E0E0E" stroke-width="1.6" stroke-linecap="round"/>
+  </svg>
+</div>
+
+<header class="head">
+  <div class="bar"></div>
+  <h1>İstekler</h1>
+</header>
+
+<div class="total">
+  <small>Toplam<i>4 ürün</i></small>
+  <b>₺12.740</b>
+</div>
+
+<nav class="filt">
+  <a class="on" href="#">Hepsi</a>
+  <a href="#">Giyim</a>
+  <a href="#">Ev</a>
+  <a href="#">Teknoloji</a>
+</nav>
+
+<ul class="list">
+  <li>
+    <svg class="pic" viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round">
+      <path d="M5 45V34c0-3 2-5 5-5h8l7-9 9 2c3 7 9 11 20 13 3 .6 5 3 5 6v4z"/>
+      <path d="M5 45h54v5H5z"/>
+      <path d="M24 26l4 3M21 29.5l4 3M28 22l4 3"/>
+      <path d="M14 40h14"/>
+    </svg>
+    <div class="txt">
+      <span class="nm">Beyaz spor ayakkabı</span><span class="pr">₺2.499</span>
+      <span class="st">Zara</span><span class="pri">Öncelikli</span>
+    </div>
+  </li>
+  <li>
+    <svg class="pic" viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round">
+      <path d="M23 8l-11 6-2 32h6l2-22"/>
+      <path d="M41 8l11 6 2 32h-6l-2-22"/>
+      <path d="M23 8l9 10 9-10"/>
+      <path d="M18 24l-1 34h30l-1-34"/>
+      <path d="M32 18v40M23 8l3 18 6-8M41 8l-3 18-6-8"/>
+      <path d="M17 38h30"/>
+      <path d="M36 35.5h6v5h-6z"/>
+    </svg>
+    <div class="txt">
+      <span class="nm">Trençkot</span><span class="pr">₺3.990</span>
+      <span class="st">Mango</span><span class="pri">Öncelikli</span>
+    </div>
+  </li>
+  <li>
+    <svg class="pic" viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round">
+      <path d="M14 6h36v52H14z"/>
+      <path d="M14 20h36M14 50h36"/>
+      <path d="M28 20v5h8v-5"/>
+      <path d="M25 34h14v9a3 3 0 0 1-3 3h-8a3 3 0 0 1-3-3z"/>
+      <path d="M39 36h2a3 3 0 0 1 0 6h-2"/>
+      <path d="M20 13h8"/>
+      <circle cx="42" cy="13" r="2.2"/>
+    </svg>
+    <div class="txt">
+      <span class="nm">Kahve makinesi</span><span class="pr">₺4.251</span>
+      <span class="st">Trendyol</span><span class="pri wait">Bekleyebilir</span>
+    </div>
+  </li>
+  <li>
+    <svg class="pic" viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round">
+      <path d="M13 38v-6a19 19 0 0 1 38 0v6"/>
+      <path d="M9 36h10v20H9zM45 36h10v20H45z"/>
+      <path d="M13 42v8M51 42v8"/>
+    </svg>
+    <div class="txt">
+      <span class="nm">Kulaklık</span><span class="pr">₺2.000</span>
+      <span class="st">Hepsiburada</span><span class="pri wait">Bekleyebilir</span>
+    </div>
+  </li>
+</ul>
+
+<nav class="tabs">
+  <a href="#">
+    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"><path d="M3 8h18l-2 13H5z"/><path d="M8 8V6a4 4 0 0 1 8 0v2"/></svg>
+    Market
+  </a>
+  <a class="on" href="#">
+    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"><path d="M12 21S3 15.5 3 9a4.5 4.5 0 0 1 9-1 4.5 4.5 0 0 1 9 1c0 6.5-9 12-9 12z"/></svg>
+    İstekler
+  </a>
+</nav>
+<div class="home"></div>
+
+</body>
+</html>

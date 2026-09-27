@@ -1,0 +1,223 @@
+<!doctype html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=390, initial-scale=1">
+<title>İstekler</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Chivo:wght@300..800&family=Chivo+Mono:wght@400;500;600&display=swap&subset=latin-ext" rel="stylesheet">
+<style>
+:root{
+  --panel:#E3E0DA;
+  --plate:#ECE9E4;
+  --inset:#D4D0C9;
+  --edge:#C4BFB7;
+  --ink:#1D1D1B;
+  --ink2:#57544F;
+  --mute:#7A766F;
+  --orange:#FF5B14;
+  --lcd:#23231F;
+  --sans:"Chivo",sans-serif;
+  --mono:"Chivo Mono",monospace;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{width:390px;height:844px;margin:0;overflow:hidden}
+body{position:relative;background:var(--panel);color:var(--ink);font-family:var(--sans);-webkit-font-smoothing:antialiased}
+.lbl{font-family:var(--mono);font-size:12px;font-weight:500;letter-spacing:.12em;text-transform:uppercase;color:var(--ink2)}
+
+.status{position:absolute;top:0;left:0;right:0;height:54px;display:flex;align-items:center;justify-content:space-between;padding:6px 28px 0 36px}
+.time{font-family:var(--sans);font-weight:600;font-size:16px}
+
+/* header */
+.head{position:absolute;top:72px;left:20px;right:16px;display:flex;align-items:flex-end;justify-content:space-between}
+.head .lbl{display:flex;gap:10px;align-items:center;margin-bottom:14px}
+.head .lbl b{display:inline-block;width:6px;height:6px;border-radius:50%;background:var(--orange)}
+h1{font-weight:700;font-size:44px;letter-spacing:-.035em;line-height:.9}
+/* knob */
+.knob{position:relative;width:58px;height:58px;border-radius:50%;margin-bottom:-4px;
+  background:repeating-conic-gradient(#D9D5CE 0 4deg,#C9C4BC 4deg 8deg);
+  box-shadow:0 3px 0 #B7B1A8,0 5px 10px rgba(0,0,0,.12)}
+.knob::before{content:"";position:absolute;inset:7px;border-radius:50%;background:var(--plate);box-shadow:inset 0 1px 0 #fff,0 1px 2px rgba(0,0,0,.15)}
+.knob::after{content:"";position:absolute;left:50%;top:10px;width:3px;height:12px;margin-left:-1.5px;border-radius:2px;background:var(--orange);transform-origin:50% 19px;transform:rotate(38deg)}
+
+/* LCD total */
+.lcd{position:absolute;top:150px;left:16px;right:16px;height:84px;border-radius:12px;background:var(--lcd);padding:12px 16px;display:flex;align-items:stretch;justify-content:space-between;
+  box-shadow:inset 0 2px 0 rgba(0,0,0,.5),0 1px 0 rgba(255,255,255,.7)}
+.lcd .meta{display:flex;flex-direction:column;justify-content:space-between;font-family:var(--mono);font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:#CFCAC0}
+.lcd .meta span+span{color:#8C877E}
+.lcd .val{display:flex;align-items:center;gap:8px}
+.lcd .tl{font-family:var(--mono);font-size:26px;font-weight:500;color:#FF7A3D;line-height:1;margin-top:-2px}
+
+/* filter keys */
+.keys{position:absolute;top:250px;left:16px;right:16px;height:56px;display:flex;gap:6px;padding:5px;border-radius:14px;background:var(--inset);
+  box-shadow:inset 0 2px 3px rgba(0,0,0,.12),0 1px 0 rgba(255,255,255,.65)}
+.keys a{flex:1;position:relative;display:flex;align-items:center;justify-content:center;border-radius:9px;text-decoration:none;color:var(--ink2);
+  font-family:var(--mono);font-size:12px;font-weight:500;letter-spacing:.06em;text-transform:uppercase;padding-top:6px}
+.keys a i{position:absolute;top:7px;left:50%;width:5px;height:5px;margin-left:-2.5px;border-radius:50%;background:var(--edge)}
+.keys a.on{background:var(--plate);color:var(--ink);box-shadow:0 2px 0 var(--edge),0 3px 6px rgba(0,0,0,.08),inset 0 1px 0 #fff}
+.keys a.on i{background:var(--orange);box-shadow:0 0 6px rgba(255,91,20,.7)}
+
+/* items */
+.list{position:absolute;top:322px;left:16px;right:16px}
+.it{display:flex;align-items:center;gap:14px;height:96px}
+.it + .it{border-top:1px solid rgba(0,0,0,.07)}
+.pic{flex:none;width:76px;height:76px;border-radius:12px;background:var(--plate);display:grid;place-items:center;
+  box-shadow:0 1px 0 rgba(255,255,255,.8),inset 0 0 0 1px var(--edge)}
+.pic svg{color:var(--ink)}
+.txt{flex:1;min-width:0;display:flex;flex-direction:column;gap:7px}
+.nm{font-size:18px;font-weight:500;letter-spacing:-.01em;white-space:nowrap}
+.sub{display:flex;align-items:center;gap:10px}
+.sub .lbl{letter-spacing:.08em}
+.pr{display:flex;flex-direction:column;align-items:flex-end;gap:9px}
+.price{font-family:var(--mono);font-size:17px;font-weight:600;white-space:nowrap}
+.pri{display:flex;align-items:center;gap:6px;font-family:var(--mono);font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:var(--ink2)}
+.pri i{width:8px;height:8px;border-radius:50%;border:1.5px solid var(--mute)}
+.pri.hi{color:var(--ink)}
+.pri.hi i{border:0;background:var(--orange);box-shadow:0 0 5px rgba(255,91,20,.6)}
+
+/* tabs */
+.tabs{position:absolute;left:16px;right:16px;bottom:34px;height:64px;display:flex;gap:8px;padding:6px;border-radius:14px;background:var(--inset);
+  box-shadow:inset 0 2px 3px rgba(0,0,0,.12),0 1px 0 rgba(255,255,255,.65)}
+.tabs a{flex:1;display:flex;align-items:center;justify-content:center;gap:10px;border-radius:9px;color:var(--ink2);text-decoration:none;position:relative}
+.tabs a span{font-family:var(--mono);font-size:13px;font-weight:500;letter-spacing:.12em;text-transform:uppercase}
+.tabs a.on{background:var(--plate);color:var(--ink);box-shadow:0 2px 0 var(--edge),0 3px 6px rgba(0,0,0,.08),inset 0 1px 0 #fff}
+.tabs a i{position:absolute;top:8px;right:10px;width:6px;height:6px;border-radius:50%;background:var(--edge)}
+.tabs a.on i{background:var(--orange);box-shadow:0 0 6px rgba(255,91,20,.7)}
+.home{position:absolute;bottom:8px;left:50%;width:134px;height:5px;margin-left:-67px;border-radius:3px;background:var(--ink)}
+</style>
+</head>
+<body>
+
+<div class="status">
+  <span class="time">9:41</span>
+  <svg width="74" height="14" viewBox="0 0 74 14" fill="none">
+    <g fill="#1D1D1B"><rect x="1" y="9" width="2.2" height="3.6" rx=".5"/><rect x="5.2" y="6.6" width="2.2" height="6" rx=".5"/><rect x="9.4" y="4.2" width="2.2" height="8.4" rx=".5"/><rect x="13.6" y="1.6" width="2.2" height="11" rx=".5"/></g>
+    <g stroke="#1D1D1B" stroke-width="1.5" stroke-linecap="round"><path d="M28.2 9.6a3.3 3.3 0 0 1 4.6 0"/><path d="M25.7 7.1a6.8 6.8 0 0 1 9.6 0"/><path d="M23.2 4.6a10.3 10.3 0 0 1 14.6 0"/></g>
+    <circle cx="30.5" cy="12" r="1.1" fill="#1D1D1B"/>
+    <rect x="45.5" y="1.8" width="24" height="10.6" rx="3" stroke="#1D1D1B" stroke-opacity=".45"/>
+    <rect x="47.5" y="3.8" width="17" height="6.6" rx="1.5" fill="#1D1D1B"/>
+    <path d="M71.6 5.6v3" stroke="#1D1D1B" stroke-opacity=".45" stroke-width="1.6" stroke-linecap="round"/>
+  </svg>
+</div>
+
+<header class="head">
+  <div>
+    <span class="lbl"><b></b>WB-02 · Liste B</span>
+    <h1>İstekler</h1>
+  </div>
+  <span class="knob" aria-hidden="true"></span>
+</header>
+
+<div class="lcd">
+  <div class="meta"><span>Toplam</span><span>4 ürün</span></div>
+  <div class="val"><span class="tl">₺</span><span class="seg" data-v="12.740" data-h="46"></span></div>
+</div>
+
+<nav class="keys">
+  <a class="on" href="#"><i></i>Hepsi</a>
+  <a href="#"><i></i>Giyim</a>
+  <a href="#"><i></i>Ev</a>
+  <a href="#"><i></i>Teknoloji</a>
+</nav>
+
+<main class="list">
+  <article class="it">
+    <div class="pic">
+      <svg width="54" height="54" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M5 30.5V22c0-1.2 1-2 2.2-1.8 3.6.6 6.6-.6 8.6-3.5l1.2-1.7 2.3 1.2c3.4 1.8 6.4 4.8 9 6.8 2.4 1.9 6.8 2.4 11 3.2 2.5.5 4 2.2 4 4.4v.4"/>
+        <path d="M5 30.5h38.3v2.3c0 1.2-1 2.2-2.2 2.2H7.2C6 35 5 34 5 32.8z" fill="#FF5B14" stroke="currentColor"/>
+        <path d="M20 18.4l-2.3 3.2M23.4 20.6l-2.3 3.2M26.6 23l-2.2 3"/>
+        <path d="M8 25.5h10"/>
+      </svg>
+    </div>
+    <div class="txt">
+      <span class="nm">Beyaz spor ayakkabı</span>
+      <div class="sub"><span class="lbl">Zara</span></div>
+    </div>
+    <div class="pr"><span class="price">₺2.499</span><span class="pri hi"><i></i>Öncelikli</span></div>
+  </article>
+
+  <article class="it">
+    <div class="pic">
+      <svg width="54" height="54" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M17 6l7 6 7-6 6 3 4 25-4 1-2-14 1 23H12l1-23-2 14-4-1 4-25z"/>
+        <path d="M17 6l3 12 4-6 4 6 3-12M24 12v31M13.3 25h21.4M13.2 28.4h21.6"/>
+        <rect x="21" y="23.6" width="6" height="6.2" rx="1" fill="#FF5B14"/>
+        <circle cx="20.6" cy="34" r=".9" fill="currentColor"/><circle cx="27.4" cy="34" r=".9" fill="currentColor"/>
+        <circle cx="20.6" cy="38.6" r=".9" fill="currentColor"/><circle cx="27.4" cy="38.6" r=".9" fill="currentColor"/>
+      </svg>
+    </div>
+    <div class="txt">
+      <span class="nm">Trençkot</span>
+      <div class="sub"><span class="lbl">Mango</span></div>
+    </div>
+    <div class="pr"><span class="price">₺3.990</span><span class="pri hi"><i></i>Öncelikli</span></div>
+  </article>
+
+  <article class="it">
+    <div class="pic">
+      <svg width="54" height="54" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M10 6h28v8H10zM12 14v22M36 14v28H8v-6h28"/>
+        <path d="M18 14v5h12v-5M24 19v3"/>
+        <path d="M19 27h10v5.5a3 3 0 0 1-3 3h-4a3 3 0 0 1-3-3z" fill="#FF5B14"/>
+        <circle cx="32" cy="10" r="1.4"/>
+      </svg>
+    </div>
+    <div class="txt">
+      <span class="nm">Kahve makinesi</span>
+      <div class="sub"><span class="lbl">Trendyol</span></div>
+    </div>
+    <div class="pr"><span class="price">₺4.251</span><span class="pri"><i></i>Bekleyebilir</span></div>
+  </article>
+
+  <article class="it">
+    <div class="pic">
+      <svg width="54" height="54" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M9 28v-4a15 15 0 0 1 30 0v4"/>
+        <path d="M13 24.5v-.5a11 11 0 0 1 22 0v.5"/>
+        <rect x="7" y="26" width="8" height="14" rx="3" fill="#FF5B14"/>
+        <rect x="33" y="26" width="8" height="14" rx="3"/>
+      </svg>
+    </div>
+    <div class="txt">
+      <span class="nm">Kulaklık</span>
+      <div class="sub"><span class="lbl">Hepsiburada</span></div>
+    </div>
+    <div class="pr"><span class="price">₺2.000</span><span class="pri"><i></i>Bekleyebilir</span></div>
+  </article>
+</main>
+
+<nav class="tabs">
+  <a href="#"><i></i>
+    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 8h16l-1.5 12h-13z"/><path d="M8.5 8a3.5 3.5 0 0 1 7 0"/></svg>
+    <span>Market</span></a>
+  <a class="on" href="#"><i></i>
+    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20s-7.5-4.6-7.5-10A4.3 4.3 0 0 1 12 7.3 4.3 4.3 0 0 1 19.5 10c0 5.4-7.5 10-7.5 10z"/></svg>
+    <span>İstekler</span></a>
+</nav>
+<div class="home"></div>
+
+<script>
+// 7-segment LCD digits (with decimal point), ghost segments visible behind lit ones
+(function(){
+  const S={0:'abcdef',1:'bc',2:'abged',3:'abgcd',4:'fgbc',5:'afgcd',6:'afgedc',7:'abc',8:'abcdefg',9:'abcdfg'};
+  const hz=(x1,x2,y)=>`${x1},${y} ${x1+2},${y-2} ${x2-2},${y-2} ${x2},${y} ${x2-2},${y+2} ${x1+2},${y+2}`;
+  const vt=(x,y1,y2)=>`${x},${y1} ${x+2},${y1+2} ${x+2},${y2-2} ${x},${y2} ${x-2},${y2-2} ${x-2},${y1+2}`;
+  const P={a:hz(3,17,2),g:hz(3,17,18),d:hz(3,17,34),f:vt(2,3,17),b:vt(18,3,17),e:vt(2,19,33),c:vt(18,19,33)};
+  document.querySelectorAll('.seg').forEach(el=>{
+    const v=el.dataset.v,h=+el.dataset.h||40,on='#FF7A3D',off='rgba(255,255,255,.07)';
+    const W=26,sc=h/36;let x=3,g='';
+    [...v].forEach(ch=>{
+      if(ch==='.'){g+=`<rect x="${x-3}" y="31" width="4" height="4" rx=".6" fill="${on}"/>`;x+=6;return;}
+      g+=`<g transform="translate(${x},0) skewX(-6)">`;
+      for(const k in P){g+=`<polygon points="${P[k]}" fill="${S[ch].includes(k)?on:off}"/>`;}
+      g+='</g>';x+=W;
+    });
+    const vw=x-4;
+    el.innerHTML=`<svg width="${vw*sc}" height="${h}" viewBox="0 0 ${vw} 36">${g}</svg>`;
+  });
+})();
+</script>
+</body>
+</html>
