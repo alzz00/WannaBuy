@@ -52,8 +52,8 @@ body{background:var(--bg);color:var(--txt);font-family:var(--body);-webkit-font-
 .item .st{font-size:15px;font-weight:500;opacity:.8;margin-top:2px}
 .item .p{font-family:var(--disp);font-weight:700;letter-spacing:-.03em;line-height:1}
 .item .art{flex:none}
-.wide .body{margin-top:auto;display:flex;align-items:flex-end;justify-content:space-between;gap:8px}
-.wide .p{font-size:30px}
+.wide .body{margin-top:auto}
+.wide .p{font-size:36px;margin-top:10px}
 .wide .art{position:absolute;right:10px;top:8px}
 .narrow .art{margin:6px auto 0}
 .narrow .body{margin-top:auto}
@@ -92,21 +92,22 @@ body{background:var(--bg);color:var(--txt);font-family:var(--body);-webkit-font-
 
   <article class="t item wide a">
     <span class="tag"><svg width="11" height="11" viewBox="0 0 12 12"><path d="M6 1l5 9H1z" fill="currentColor"/></svg>Öncelikli</span>
-    <svg class="art" width="128" height="128" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5">
+    <svg class="art" width="116" height="116" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5">
       <path d="M4 33.5c0-3.6 1.4-6 3.2-8.6l4.6-7c1-1.5 3-1.6 4.1-.2l2.6 3.3c2.2 2.6 5.3 4 8.6 4.5l9.4 1.4c4.3.7 7.5 3.1 7.5 6.8V38H4z"/>
-      <path d="M4 38.5h40"/><path d="M4 34.5h40" opacity=".5"/>
+      <path d="M4 38.5h40"/>
       <path d="M17.5 21l3.2-2M19.8 24l3.2-2M22.6 26.6l3.2-2"/>
       <path d="M8 26.5c2.5 0 4.5 1.5 5.5 4"/>
     </svg>
-    <div class="body"><div><h3>Beyaz spor<br>ayakkabı</h3><div class="st">Zara</div></div><b class="p">₺2.499</b></div>
+    <div class="body"><h3>Beyaz spor ayakkabı</h3><div class="st">Zara</div><b class="p">₺2.499</b></div>
   </article>
   <article class="t item narrow b">
     <span class="tag"><svg width="11" height="11" viewBox="0 0 12 12"><path d="M6 1l5 9H1z" fill="currentColor"/></svg>Öncelikli</span>
     <svg class="art" width="80" height="80" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8">
-      <path d="M18 5l-8 3.5L7 42h11l6-20 6 20h11L38 8.5 30 5"/>
-      <path d="M18 5l6 11 6-11"/><path d="M18 5l-2 9 4 3M30 5l2 9-4 3"/>
-      <path d="M8.5 27h31"/><rect x="21.5" y="25" width="5" height="4" rx="1"/>
-      <circle cx="20" cy="20.5" r=".9"/><circle cx="28" cy="20.5" r=".9"/><circle cx="20" cy="33" r=".9"/><circle cx="28" cy="33" r=".9"/>
+      <path d="M18 5l-6 2.5-1 35.5h26L36 7.5 30 5"/>
+      <path d="M12 7.5L6.5 11 4 33h4.5L11 19M36 7.5l5.5 3.5L44 33h-4.5L37 19"/>
+      <path d="M18 5l6 10 6-10M24 15v28"/>
+      <path d="M11.4 27h25.2"/><rect x="21.5" y="25" width="5" height="4" rx="1"/>
+      <path d="M20 19.5h.01M20 34h.01" stroke-width="2.6"/>
     </svg>
     <div class="body"><h3>Trençkot</h3><div class="st">Mango</div><b class="p">₺3.990</b></div>
   </article>
@@ -121,7 +122,7 @@ body{background:var(--bg);color:var(--txt);font-family:var(--body);-webkit-font-
   </article>
   <article class="t item wide d">
     <span class="tag"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>Bekleyebilir</span>
-    <svg class="art" width="124" height="124" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5">
+    <svg class="art" width="104" height="104" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5">
       <path d="M12 5h24a2 2 0 0 1 2 2v34a2 2 0 0 1-2 2H12a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2z"/>
       <path d="M10 15h28M10 38h28"/>
       <path d="M20 15v3.5h8V15"/>
@@ -129,7 +130,7 @@ body{background:var(--bg);color:var(--txt);font-family:var(--body);-webkit-font-
       <path d="M22.5 21.5v2.5M25.5 21.5v2.5" opacity=".6"/>
       <circle cx="31.5" cy="10" r="1.6"/><path d="M15 10h7"/>
     </svg>
-    <div class="body"><div><h3>Kahve<br>makinesi</h3><div class="st">Trendyol</div></div><b class="p">₺4.251</b></div>
+    <div class="body"><h3>Kahve makinesi</h3><div class="st">Trendyol</div><b class="p">₺4.251</b></div>
   </article>
 </main>
 

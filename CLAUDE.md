@@ -39,6 +39,14 @@ Yayın: GitHub Pages, https://alzz00.github.io/WannaBuy/ (adres büyük/küçük
   5. **70'ler** (`retro`): Shrikhand + Fraunces + Bricolage Grotesque, hardal/turuncu/kahve şeritler.
   Dosyalar: `_tasarim/<yön>/market.html`, `istek.html`; karşılaştırma görselleri `_tasarim/hepsi.png`, `tek-<yön>.png`
   (`node _tasarim/birlestir.js "$(cat _tasarim/liste.json)"` sayfaları üretir, sonra headless tarayıcıyla çekilir).
+  Kullanıcı hiçbirini beğenmedi: "daha modern bir şey olsun".
+- 2026-09-28 gece: modern tur, 5 yeni yön (dal `tasarim-modern`, brif `_tasarim/modern-brif.md`,
+  liste `_tasarim/liste-modern.json`, karşılaştırma `_tasarim/modern.png`):
+  1. **Cam** (`cam`): iOS 26 buzlu cam, domates/kayısı/erik bulanık şekiller, Funnel Display + Host Grotesk.
+  2. **Neon** (`neon`): koyu kömür + tek asit yeşili vurgu, halka sayaç, Geist + Geist Mono.
+  3. **Bento** (`bento`): siyah zemin, canlı renkli kutucuk ızgarası, Unbounded + Onest.
+  4. **İsviçre** (`isvicre`): kırık beyaz, siyah, cıva kırmızısı; dev geniş Archivo, iki sütun ızgara.
+  5. **Cihaz** (`cihaz`): Teenage Engineering tarzı gri panel, turuncu 7 segment ekran, kaydırmalı anahtarlar, Chivo + Chivo Mono.
   Kullanıcı birini seçecek (ya da karıştıracak).
 - Sıradaki: seçilen yönle uygulamayı yap (`index.html` + `sw.js` + `manifest.webmanifest` + `ikonlar/`), görsellerini göster,
   "yükle" gelince yayınla. Şu an `index.html` sadece "yakında" sayfası.
@@ -59,5 +67,8 @@ Yayın: GitHub Pages, https://alzz00.github.io/WannaBuy/ (adres büyük/küçük
   alttaki sabit sekme çubuğu havada kalıyor. Çözüm: standalone modda `html { min-height: calc(100% + 1px) }`.
   Service worker önizlemede eski dosyayı verir; denemeden önce SW'yi kaldırıp önbelleği sil.
 - Bilgisayarda önizleme: `node araclar/onizleme.js` → http://localhost:4547
+- Bulutta ekran görüntüsü: `NODE_PATH=$(npm root -g) node araclar/ekran-goruntusu.js <sayfa.html> <çıktı.png> [en] [boy]`
+  (Google Fonts'u curl ile getirir; tarayıcı vekil sunucu sertifikasını tanımıyor). Görselleri kullanıcıya her zaman
+  sohbette de gönder, GitHub'da olsa bile.
 - Commit kimliği: `alzz00` / `333697088+alzz00@users.noreply.github.com`. Kişisel e-posta adresini yazma.
 - Yayın `main` dalından. Bulut oturumu `main`'e gönderemezse PR aç; kullanıcı telefondan **Merge**'e basınca yayına çıkar.
