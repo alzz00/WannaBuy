@@ -1,11 +1,12 @@
 // Tasarım yönlerini telefon çerçevesi içinde yan yana gösteren sayfalar üretir.
-// node birlestir.js '<json: [{key, name, tagline}]>'
+// node birlestir.js '<json: [{key, name, tagline}]>' [karşılaştırma dosyası adı, varsayılan: hepsi]
 'use strict';
 const fs = require('fs');
 const path = require('path');
 
 const dir = __dirname;
 const list = JSON.parse(process.argv[2]);
+const outName = process.argv[3] || 'hepsi';
 
 const css = `
 * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -33,7 +34,7 @@ const phone = (key, file) =>
   const head = list.map((d, i) => `<div class="col"><div class="label"><div class="n">${i + 1}</div><div class="t"><b>${d.name}</b><span>${d.tagline}</span></div></div></div>`).join('');
   const r1 = list.map(d => `<div class="col">${phone(d.key, 'market')}</div>`).join('');
   const r2 = list.map(d => `<div class="col">${phone(d.key, 'istek')}</div>`).join('');
-  fs.writeFileSync(path.join(dir, 'hepsi.html'),
+  fs.writeFileSync(path.join(dir, `${outName}.html`),
     `<!doctype html><meta charset="utf-8"><style>${css}</style><div class="row">${head}</div><div class="row">${r1}</div><div class="gap"></div><div class="row">${r2}</div>`);
 }
 
@@ -46,4 +47,4 @@ list.forEach((d, i) => {
     `<div class="col">${phone(d.key, 'istek')}<div class="cap">İstekler</div></div></div>`);
 });
 
-console.log('hazır:', ['hepsi.html', ...list.map(d => `tek-${d.key}.html`)].join(', '));
+console.log('hazır:', [`${outName}.html`, ...list.map(d => `tek-${d.key}.html`)].join(', '));
