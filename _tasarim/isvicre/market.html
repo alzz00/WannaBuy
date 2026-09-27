@@ -1,0 +1,170 @@
+<!doctype html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=390, initial-scale=1">
+<title>Market</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,100..900&family=Inter+Tight:wght@400;500;700;800&display=swap&subset=latin-ext" rel="stylesheet">
+<style>
+:root{
+  --paper:#F3F2EE;
+  --ink:#0E0E0E;
+  --ink2:#4A4A48;
+  --mute:#6B6B68;
+  --hair:rgba(14,14,14,.16);
+  --sig:#E4380E;
+  --f:"Archivo","Inter Tight",sans-serif;
+  --m:20px;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{width:390px;height:844px;margin:0;overflow:hidden}
+body{position:relative;background:var(--paper);color:var(--ink);font-family:var(--f);-webkit-font-smoothing:antialiased;font-feature-settings:"tnum" 1}
+
+/* status */
+.status{position:absolute;top:0;left:0;right:0;height:54px;display:flex;align-items:center;justify-content:space-between;padding:6px 26px 0 34px}
+.time{font-weight:650;font-size:16px;font-stretch:100%}
+
+/* header */
+.head{position:absolute;top:58px;left:var(--m);right:var(--m)}
+.bar{height:6px;background:var(--ink)}
+h1{padding-top:16px;font-weight:900;font-stretch:125%;font-size:79px;line-height:.8;letter-spacing:-.04em;margin-left:-3px}
+.row2{position:absolute;top:176px;left:var(--m);right:var(--m);display:grid;grid-template-columns:116px 1fr;align-items:end}
+.count b{display:block;font-weight:900;font-stretch:125%;font-size:100px;line-height:.72;letter-spacing:-.05em;color:var(--sig);margin-left:-4px}
+.count span{display:block;margin-top:10px;font-weight:800;font-size:12px;letter-spacing:.12em;text-transform:uppercase}
+
+/* add */
+.add{min-width:0;height:56px;display:flex;align-items:stretch;border-top:2px solid var(--ink);border-bottom:2px solid var(--ink)}
+.add input{flex:1;min-width:0;border:0;background:transparent;outline:0;font-family:var(--f);font-size:19px;font-weight:500;color:var(--ink);padding:0 0 0 2px}
+.add input::placeholder{color:var(--mute)}
+.add button{flex:none;width:56px;margin:-2px 0;border:0;background:var(--ink);color:var(--paper);display:grid;place-items:center;cursor:pointer}
+
+/* list grid: col A 116px | col B rest */
+.list{position:absolute;top:300px;left:var(--m);right:var(--m)}
+.sec{display:grid;grid-template-columns:116px 1fr;border-top:1px solid var(--ink)}
+.sec + .sec{margin-top:14px}
+.lab{padding-top:12px;display:flex;flex-direction:column;gap:8px}
+.lab small{font-weight:800;font-size:12px;letter-spacing:.12em;text-transform:uppercase}
+.lab svg{color:var(--ink)}
+ul{list-style:none}
+li{height:50px;display:flex;align-items:center;gap:14px}
+li + li{border-top:1px solid var(--hair)}
+.box{flex:none;width:22px;height:22px;border:2px solid var(--ink)}
+.name{flex:1;font-size:18px;font-weight:500;letter-spacing:-.005em;white-space:nowrap}
+.qty{font-size:16px;font-weight:500;color:var(--ink2);white-space:nowrap}
+
+.done .lab small{color:var(--ink)}
+.done .lab em{font-style:normal;font-weight:900;font-stretch:125%;font-size:40px;line-height:.8;color:var(--ink);letter-spacing:-.04em}
+.done .box{border:0;background:var(--sig);display:grid;place-items:center}
+.done .name{color:var(--mute);text-decoration:line-through;text-decoration-thickness:1.5px}
+
+/* tabs */
+.tabs{position:absolute;left:var(--m);right:var(--m);bottom:34px;height:58px;display:grid;grid-template-columns:1fr 1fr;border-top:2px solid var(--ink)}
+.tabs a{position:relative;display:flex;align-items:center;gap:10px;text-decoration:none;color:var(--mute);font-weight:700;font-size:16px}
+.tabs a + a{padding-left:16px;border-left:1px solid var(--hair)}
+.tabs a.on{color:var(--ink)}
+.tabs a.on::before{content:"";position:absolute;left:0;right:0;top:-2px;height:6px;background:var(--sig)}
+.tabs a + a.on::before{left:0}
+.home{position:absolute;bottom:8px;left:50%;width:134px;height:5px;margin-left:-67px;border-radius:3px;background:var(--ink)}
+</style>
+</head>
+<body>
+
+<div class="status">
+  <span class="time">9:41</span>
+  <svg width="74" height="14" viewBox="0 0 74 14" fill="none">
+    <g fill="#0E0E0E"><rect x="1" y="9" width="2.4" height="3.6"/><rect x="5.2" y="6.6" width="2.4" height="6"/><rect x="9.4" y="4.2" width="2.4" height="8.4"/><rect x="13.6" y="1.6" width="2.4" height="11"/></g>
+    <g stroke="#0E0E0E" stroke-width="1.5" stroke-linecap="round"><path d="M28.2 9.6a3.3 3.3 0 0 1 4.6 0"/><path d="M25.7 7.1a6.8 6.8 0 0 1 9.6 0"/><path d="M23.2 4.6a10.3 10.3 0 0 1 14.6 0"/></g>
+    <circle cx="30.5" cy="12" r="1.1" fill="#0E0E0E"/>
+    <rect x="45.5" y="1.8" width="24" height="10.6" rx="2.6" stroke="#0E0E0E" stroke-width="1"/>
+    <rect x="47.5" y="3.8" width="17" height="6.6" rx="1.2" fill="#0E0E0E"/>
+    <path d="M71.6 5.6v3" stroke="#0E0E0E" stroke-width="1.6" stroke-linecap="round"/>
+  </svg>
+</div>
+
+<header class="head">
+  <div class="bar"></div>
+  <h1>Market</h1>
+</header>
+
+<div class="row2">
+<div class="count"><b>5</b><span>kaldı</span></div>
+
+<form class="add" onsubmit="return false">
+  <input type="text" placeholder="Ne alacaksın?" aria-label="Ne alacaksın?">
+  <button type="submit" aria-label="Ekle">
+    <svg width="22" height="22" viewBox="0 0 22 22"><path d="M11 2v18M2 11h18" stroke="currentColor" stroke-width="2.6"/></svg>
+  </button>
+</form>
+</div>
+
+<main class="list">
+  <section class="sec">
+    <div class="lab">
+      <svg width="28" height="28" viewBox="0 0 28 28" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round">
+        <circle cx="14" cy="16.5" r="8"/>
+        <path d="M14 8.5V5M14 8.5l-4-2.5M14 8.5l4-2.5"/>
+      </svg>
+      <small>Manav</small>
+    </div>
+    <ul>
+      <li><b class="box"></b><span class="name">Domates</span><span class="qty">1 kg</span></li>
+      <li><b class="box"></b><span class="name">Muz</span><span class="qty">6 adet</span></li>
+    </ul>
+  </section>
+
+  <section class="sec">
+    <div class="lab">
+      <svg width="28" height="28" viewBox="0 0 28 28" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round">
+        <path d="M10 3h8v4l3 4v14H7V11l3-4z"/>
+        <path d="M7 15h14"/>
+      </svg>
+      <small>Kahvaltılık</small>
+    </div>
+    <ul>
+      <li><b class="box"></b><span class="name">Süt</span><span class="qty">2</span></li>
+      <li><b class="box"></b><span class="name">Yumurta</span><span class="qty">30'lu</span></li>
+    </ul>
+  </section>
+
+  <section class="sec">
+    <div class="lab">
+      <svg width="28" height="28" viewBox="0 0 28 28" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round">
+        <path d="M11 3h6v4h-6z"/>
+        <path d="M9 7h10v18H9z"/>
+        <path d="M9 13h10"/>
+      </svg>
+      <small>Temizlik</small>
+    </div>
+    <ul>
+      <li><b class="box"></b><span class="name">Bulaşık deterjanı</span></li>
+    </ul>
+  </section>
+
+  <section class="sec done">
+    <div class="lab">
+      <em>2</em>
+      <small>Alındı</small>
+    </div>
+    <ul>
+      <li><b class="box"><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2 7.5l3.2 3L12 3.5" stroke="#fff" stroke-width="2.2"/></svg></b><span class="name">Ekmek</span></li>
+      <li><b class="box"><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2 7.5l3.2 3L12 3.5" stroke="#fff" stroke-width="2.2"/></svg></b><span class="name">Beyaz peynir</span></li>
+    </ul>
+  </section>
+</main>
+
+<nav class="tabs">
+  <a class="on" href="#">
+    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"><path d="M3 8h18l-2 13H5z"/><path d="M8 8V6a4 4 0 0 1 8 0v2"/></svg>
+    Market
+  </a>
+  <a href="#">
+    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"><path d="M12 21S3 15.5 3 9a4.5 4.5 0 0 1 9-1 4.5 4.5 0 0 1 9 1c0 6.5-9 12-9 12z"/></svg>
+    İstekler
+  </a>
+</nav>
+<div class="home"></div>
+
+</body>
+</html>

@@ -1,0 +1,195 @@
+<!doctype html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=390, initial-scale=1">
+<title>Market</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Chivo:wght@300..800&family=Chivo+Mono:wght@400;500;600&display=swap&subset=latin-ext" rel="stylesheet">
+<style>
+:root{
+  --panel:#E3E0DA;
+  --plate:#ECE9E4;
+  --inset:#D4D0C9;
+  --edge:#C4BFB7;
+  --ink:#1D1D1B;
+  --ink2:#57544F;
+  --mute:#7A766F;
+  --orange:#FF5B14;
+  --lcd:#23231F;
+  --sans:"Chivo",sans-serif;
+  --mono:"Chivo Mono",monospace;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{width:390px;height:844px;margin:0;overflow:hidden}
+body{position:relative;background:var(--panel);color:var(--ink);font-family:var(--sans);-webkit-font-smoothing:antialiased}
+.lbl{font-family:var(--mono);font-size:12px;font-weight:500;letter-spacing:.12em;text-transform:uppercase;color:var(--ink2)}
+
+/* status */
+.status{position:absolute;top:0;left:0;right:0;height:54px;display:flex;align-items:center;justify-content:space-between;padding:6px 28px 0 36px}
+.time{font-family:var(--sans);font-weight:600;font-size:16px}
+
+/* header plate */
+.head{position:absolute;top:60px;left:16px;right:16px;height:98px;display:flex;align-items:stretch;gap:12px}
+.title{flex:1;display:flex;flex-direction:column;justify-content:space-between;padding:4px 4px 6px}
+.title .lbl{display:flex;gap:10px;align-items:center}
+.title .lbl b{display:inline-block;width:6px;height:6px;border-radius:50%;background:var(--orange)}
+h1{font-weight:700;font-size:44px;letter-spacing:-.035em;line-height:.9}
+.lcd{flex:none;width:136px;border-radius:12px;background:var(--lcd);padding:12px 14px 10px;display:flex;flex-direction:column;justify-content:space-between;
+  box-shadow:inset 0 2px 0 rgba(0,0,0,.5),0 1px 0 rgba(255,255,255,.7)}
+.lcd .row{display:flex;align-items:flex-end;justify-content:space-between}
+.lcd .unit{font-family:var(--mono);font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:#CFCAC0}
+.lcd .top{display:flex;justify-content:space-between;font-family:var(--mono);font-size:12px;letter-spacing:.12em;color:#8C877E}
+.seg{display:block}
+
+/* input */
+.add{position:absolute;top:172px;left:16px;right:16px;height:60px;display:flex;align-items:center;gap:10px}
+.slot{flex:1;height:56px;border-radius:12px;background:var(--inset);display:flex;align-items:center;padding:0 18px;
+  box-shadow:inset 0 2px 3px rgba(0,0,0,.12),0 1px 0 rgba(255,255,255,.65)}
+.slot input{flex:1;min-width:0;border:0;background:transparent;outline:0;font-family:var(--sans);font-size:17px;color:var(--ink)}
+.slot input::placeholder{color:var(--mute)}
+.key{flex:none;width:60px;height:60px;border-radius:50%;border:0;background:var(--orange);display:grid;place-items:center;cursor:pointer;
+  box-shadow:0 3px 0 #C23F05,0 5px 10px rgba(80,30,0,.18),inset 0 1px 0 rgba(255,255,255,.35)}
+
+/* list */
+.list{position:absolute;top:250px;left:16px;right:16px}
+.grp{margin-bottom:8px}
+.gh{display:flex;align-items:center;gap:10px;height:30px;padding:0 4px}
+.gh .n{font-family:var(--mono);font-size:12px;color:var(--ink);font-weight:600}
+.gh .c{font-family:var(--mono);font-size:12px;color:var(--ink2);font-weight:500;letter-spacing:.08em}
+.gh .rule{flex:1;height:1px;background:var(--edge)}
+.gh svg{color:var(--ink2)}
+.row{display:flex;align-items:center;height:46px;padding:0 4px 0 4px;gap:12px}
+.row + .row{border-top:1px solid rgba(0,0,0,.06)}
+.nm{flex:1;font-size:18px;font-weight:400;letter-spacing:-.005em;white-space:nowrap}
+.q{font-family:var(--mono);font-size:14px;color:var(--ink2);white-space:nowrap}
+
+/* toggle switch */
+.sw{flex:none;position:relative;width:52px;height:30px;border-radius:8px;background:var(--inset);
+  box-shadow:inset 0 2px 3px rgba(0,0,0,.16),0 1px 0 rgba(255,255,255,.7)}
+.sw::before{content:"";position:absolute;top:4px;left:4px;width:22px;height:22px;border-radius:5px;background:var(--plate);
+  box-shadow:0 1.5px 0 var(--edge),0 2px 4px rgba(0,0,0,.14),inset 0 1px 0 #fff}
+.sw::after{content:"";position:absolute;top:13px;left:14px;width:2px;height:4px;border-radius:1px;background:var(--mute);opacity:.6}
+.sw.on{background:var(--orange);box-shadow:inset 0 2px 3px rgba(120,40,0,.35),0 1px 0 rgba(255,255,255,.7)}
+.sw.on::before{left:26px}
+.sw.on::after{left:36px;background:var(--orange);opacity:1}
+
+.done .row .nm{color:var(--mute);text-decoration:line-through;text-decoration-thickness:1.5px;text-decoration-color:var(--mute)}
+.done .gh .n{color:var(--ink2)}
+
+/* tabs */
+.tabs{position:absolute;left:16px;right:16px;bottom:34px;height:64px;display:flex;gap:8px;padding:6px;border-radius:14px;background:var(--inset);
+  box-shadow:inset 0 2px 3px rgba(0,0,0,.12),0 1px 0 rgba(255,255,255,.65)}
+.tabs a{flex:1;display:flex;align-items:center;justify-content:center;gap:10px;border-radius:9px;color:var(--ink2);text-decoration:none;position:relative}
+.tabs a span{font-family:var(--mono);font-size:13px;font-weight:500;letter-spacing:.12em;text-transform:uppercase}
+.tabs a.on{background:var(--plate);color:var(--ink);box-shadow:0 2px 0 var(--edge),0 3px 6px rgba(0,0,0,.08),inset 0 1px 0 #fff}
+.tabs a i{position:absolute;top:8px;right:10px;width:6px;height:6px;border-radius:50%;background:var(--edge)}
+.tabs a.on i{background:var(--orange);box-shadow:0 0 6px rgba(255,91,20,.7)}
+.home{position:absolute;bottom:8px;left:50%;width:134px;height:5px;margin-left:-67px;border-radius:3px;background:var(--ink)}
+</style>
+</head>
+<body>
+
+<div class="status">
+  <span class="time">9:41</span>
+  <svg width="74" height="14" viewBox="0 0 74 14" fill="none">
+    <g fill="#1D1D1B"><rect x="1" y="9" width="2.2" height="3.6" rx=".5"/><rect x="5.2" y="6.6" width="2.2" height="6" rx=".5"/><rect x="9.4" y="4.2" width="2.2" height="8.4" rx=".5"/><rect x="13.6" y="1.6" width="2.2" height="11" rx=".5"/></g>
+    <g stroke="#1D1D1B" stroke-width="1.5" stroke-linecap="round"><path d="M28.2 9.6a3.3 3.3 0 0 1 4.6 0"/><path d="M25.7 7.1a6.8 6.8 0 0 1 9.6 0"/><path d="M23.2 4.6a10.3 10.3 0 0 1 14.6 0"/></g>
+    <circle cx="30.5" cy="12" r="1.1" fill="#1D1D1B"/>
+    <rect x="45.5" y="1.8" width="24" height="10.6" rx="3" stroke="#1D1D1B" stroke-opacity=".45"/>
+    <rect x="47.5" y="3.8" width="17" height="6.6" rx="1.5" fill="#1D1D1B"/>
+    <path d="M71.6 5.6v3" stroke="#1D1D1B" stroke-opacity=".45" stroke-width="1.6" stroke-linecap="round"/>
+  </svg>
+</div>
+
+<header class="head">
+  <div class="title">
+    <span class="lbl"><b></b>WB-01 · Liste A</span>
+    <h1>Market</h1>
+  </div>
+  <div class="lcd">
+    <div class="top"><span>SEPET</span><span>5/7</span></div>
+    <div class="row">
+      <span class="seg" data-v="05" data-h="42"></span>
+      <span class="unit">kaldı</span>
+    </div>
+  </div>
+</header>
+
+<form class="add" onsubmit="return false">
+  <label class="slot"><input type="text" placeholder="Ne alacaksın?" aria-label="Ne alacaksın?"></label>
+  <button class="key" type="submit" aria-label="Ekle">
+    <svg width="22" height="22" viewBox="0 0 22 22" stroke="#1D1D1B" stroke-width="2.4" stroke-linecap="round"><path d="M11 3v16M3 11h16"/></svg>
+  </button>
+</form>
+
+<main class="list">
+  <section class="grp">
+    <div class="gh">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="14" r="7"/><path d="M12 7V4.5M12 7c-1.6-1.6-3.8-1.8-5-1M12 7c1.6-1.6 3.8-1.8 5-1"/></svg>
+      <span class="n">01</span><span class="lbl">Manav</span><b class="rule"></b>
+    </div>
+    <div class="row"><span class="nm">Domates</span><span class="q">1 kg</span><span class="sw"></span></div>
+    <div class="row"><span class="nm">Muz</span><span class="q">6 adet</span><span class="sw"></span></div>
+  </section>
+
+  <section class="grp">
+    <div class="gh">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M8 3h8v3l2 3v11a1 1 0 0 1-1 1H7a1 1 0 0 1-1-1V9l2-3z"/><path d="M6 12h12"/></svg>
+      <span class="n">02</span><span class="lbl">Kahvaltılık</span><b class="rule"></b>
+    </div>
+    <div class="row"><span class="nm">Süt</span><span class="q">2</span><span class="sw"></span></div>
+    <div class="row"><span class="nm">Yumurta</span><span class="q">30'lu</span><span class="sw"></span></div>
+  </section>
+
+  <section class="grp">
+    <div class="gh">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M10 3h4v3h-4z"/><path d="M9 6h6l2 4v10a1 1 0 0 1-1 1H8a1 1 0 0 1-1-1V10z"/><circle cx="19" cy="4" r="1.3"/><circle cx="20.5" cy="7.5" r=".8"/></svg>
+      <span class="n">03</span><span class="lbl">Temizlik</span><b class="rule"></b>
+    </div>
+    <div class="row"><span class="nm">Bulaşık deterjanı</span><span class="sw"></span></div>
+  </section>
+
+  <section class="grp done">
+    <div class="gh">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3.5" y="3.5" width="17" height="17" rx="3"/><path d="M8 12.5l2.8 2.8L16.5 9"/></svg>
+      <span class="lbl">Alındı</span><b class="rule"></b><span class="c">2</span>
+    </div>
+    <div class="row"><span class="nm">Ekmek</span><span class="sw on"></span></div>
+    <div class="row"><span class="nm">Beyaz peynir</span><span class="sw on"></span></div>
+  </section>
+</main>
+
+<nav class="tabs">
+  <a class="on" href="#"><i></i>
+    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 8h16l-1.5 12h-13z"/><path d="M8.5 8a3.5 3.5 0 0 1 7 0"/></svg>
+    <span>Market</span></a>
+  <a href="#"><i></i>
+    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20s-7.5-4.6-7.5-10A4.3 4.3 0 0 1 12 7.3 4.3 4.3 0 0 1 19.5 10c0 5.4-7.5 10-7.5 10z"/></svg>
+    <span>İstekler</span></a>
+</nav>
+<div class="home"></div>
+
+<script>
+// 7-segment LCD digits, ghost segments visible behind lit ones
+(function(){
+  const S={0:'abcdef',1:'bc',2:'abged',3:'abgcd',4:'fgbc',5:'afgcd',6:'afgedc',7:'abc',8:'abcdefg',9:'abcdfg'};
+  const hz=(x1,x2,y)=>`${x1},${y} ${x1+2},${y-2} ${x2-2},${y-2} ${x2},${y} ${x2-2},${y+2} ${x1+2},${y+2}`;
+  const vt=(x,y1,y2)=>`${x},${y1} ${x+2},${y1+2} ${x+2},${y2-2} ${x},${y2} ${x-2},${y2-2} ${x-2},${y1+2}`;
+  const P={a:hz(3,17,2),g:hz(3,17,18),d:hz(3,17,34),f:vt(2,3,17),b:vt(18,3,17),e:vt(2,19,33),c:vt(18,19,33)};
+  document.querySelectorAll('.seg').forEach(el=>{
+    const v=el.dataset.v,h=+el.dataset.h||40,on=el.dataset.c||'#FF7A3D',off='rgba(255,255,255,.07)';
+    const W=26,sc=h/36,w=(v.length*W-6)*sc+4;
+    let g='';
+    [...v].forEach((ch,i)=>{
+      g+=`<g transform="translate(${i*W+3},0) skewX(-6)">`;
+      for(const k in P){g+=`<polygon points="${P[k]}" fill="${S[ch].includes(k)?on:off}"/>`;}
+      g+='</g>';
+    });
+    el.innerHTML=`<svg width="${w}" height="${h}" viewBox="0 0 ${w/sc} 36">${g}</svg>`;
+  });
+})();
+</script>
+</body>
+</html>

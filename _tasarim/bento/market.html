@@ -1,0 +1,175 @@
+<!doctype html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=390, initial-scale=1">
+<title>Market</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@400;500;600;700&family=Onest:wght@400;500;600&display=swap&subset=latin-ext" rel="stylesheet">
+<style>
+:root{
+  --bg:#0C0C0E;
+  --tile:#1D1D21;
+  --tile2:#26262B;
+  --txt:#F4F2EE;
+  --mute:#A3A09A;
+  --lime:#C9F53B;
+  --orange:#FF5B1F;
+  --cobalt:#2D4BF5;
+  --pink:#FF7BC8;
+  --violet:#6C4BFF;
+  --ink:#0C0C0E;
+  --disp:"Unbounded",sans-serif;
+  --body:"Onest",sans-serif;
+  --r:24px;
+  --gap:6px;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{width:390px;height:844px;margin:0;overflow:hidden}
+body{background:var(--bg);color:var(--txt);font-family:var(--body);-webkit-font-smoothing:antialiased;position:relative}
+
+.status{position:absolute;top:0;left:0;right:0;height:54px;display:flex;align-items:center;justify-content:space-between;padding:6px 28px 0 36px}
+.time{font-family:var(--body);font-weight:600;font-size:17px}
+
+.grid{position:absolute;top:58px;left:12px;right:12px;display:grid;grid-template-columns:repeat(6,1fr);gap:var(--gap);
+  grid-template-rows:110px 58px 258px 240px}
+.t{border-radius:var(--r);position:relative;overflow:hidden}
+
+/* header */
+.title{grid-column:span 4;background:var(--tile);padding:18px 20px;display:flex;flex-direction:column;justify-content:space-between}
+.title small{font-size:13px;font-weight:500;color:var(--mute);letter-spacing:.02em}
+.title h1{font-family:var(--disp);font-weight:600;font-size:38px;line-height:1;letter-spacing:-.02em}
+.count{grid-column:span 2;background:var(--lime);color:var(--ink);padding:12px 16px 16px;display:flex;flex-direction:column;justify-content:space-between}
+.count b{font-family:var(--disp);font-weight:700;font-size:72px;line-height:.85;letter-spacing:-.05em}
+.count span{font-size:16px;font-weight:600}
+
+/* add */
+.add{grid-column:span 5;background:var(--tile);display:flex;align-items:center;padding:0 20px}
+.add input{flex:1;min-width:0;border:0;background:transparent;outline:0;font-family:var(--body);font-size:17px;color:var(--txt)}
+.add input::placeholder{color:var(--mute)}
+.plus{grid-column:span 1;background:var(--lime);color:var(--ink);border:0;display:grid;place-items:center;cursor:pointer}
+
+/* aisle tiles */
+.aisle{padding:16px 16px 10px;display:flex;flex-direction:column}
+.aisle .hd{display:flex;align-items:flex-start;justify-content:space-between}
+.aisle .n{font-family:var(--disp);font-weight:700;font-size:64px;line-height:.82;letter-spacing:-.05em}
+.aisle h2{font-family:var(--disp);font-weight:500;font-size:15px;letter-spacing:.01em;margin-top:12px}
+.aisle ul{list-style:none;margin-top:auto}
+.aisle li{display:flex;align-items:center;gap:12px;min-height:48px;font-size:17px;font-weight:500}
+.aisle li + li{border-top:1.5px solid currentColor;border-top-color:color-mix(in srgb,currentColor 22%,transparent)}
+.box{flex:none;width:24px;height:24px;border-radius:8px;border:2px solid currentColor}
+.q{margin-left:auto;font-family:var(--disp);font-size:13px;font-weight:500;white-space:nowrap}
+
+.manav{grid-column:span 4;background:var(--orange);color:var(--ink)}
+.temiz{grid-column:span 2;background:var(--cobalt);color:#fff}
+.temiz li{align-items:flex-start;padding:12px 0;line-height:1.2}
+.temiz .n{font-size:56px}
+.alindi{grid-column:span 2;background:var(--tile);color:var(--txt)}
+.alindi .n{color:var(--mute);font-size:56px}
+.alindi li{color:var(--mute);min-height:44px;font-size:16px}
+.alindi li span{text-decoration:line-through;text-decoration-thickness:1.5px}
+.chk{flex:none;width:24px;height:24px;border-radius:8px;background:var(--tile2);display:grid;place-items:center;color:var(--lime)}
+.kahv{grid-column:span 4;background:var(--pink);color:var(--ink)}
+
+/* tabs */
+.tabs{position:absolute;left:12px;right:12px;bottom:30px;height:64px;display:grid;grid-template-columns:1fr 1fr;gap:var(--gap)}
+.tabs a{border-radius:20px;display:flex;align-items:center;justify-content:center;gap:10px;text-decoration:none;font-family:var(--disp);font-weight:500;font-size:14px;color:var(--mute);background:var(--tile)}
+.tabs a.on{background:var(--txt);color:var(--ink)}
+.home{position:absolute;bottom:8px;left:50%;width:134px;height:5px;margin-left:-67px;border-radius:3px;background:var(--txt)}
+</style>
+</head>
+<body>
+
+<div class="status">
+  <span class="time">9:41</span>
+  <svg width="74" height="14" viewBox="0 0 74 14" fill="none">
+    <g fill="#F4F2EE"><rect x="1" y="9" width="2.4" height="3.6" rx=".6"/><rect x="5.2" y="6.6" width="2.4" height="6" rx=".6"/><rect x="9.4" y="4.2" width="2.4" height="8.4" rx=".6"/><rect x="13.6" y="1.6" width="2.4" height="11" rx=".6"/></g>
+    <g stroke="#F4F2EE" stroke-width="1.6" stroke-linecap="round"><path d="M28.2 9.6a3.3 3.3 0 0 1 4.6 0"/><path d="M25.7 7.1a6.8 6.8 0 0 1 9.6 0"/><path d="M23.2 4.6a10.3 10.3 0 0 1 14.6 0"/></g>
+    <circle cx="30.5" cy="12" r="1.2" fill="#F4F2EE"/>
+    <rect x="45.5" y="1.8" width="24" height="10.6" rx="3" stroke="#F4F2EE" stroke-opacity=".5" stroke-width="1"/>
+    <rect x="47.5" y="3.8" width="17" height="6.6" rx="1.6" fill="#F4F2EE"/>
+    <path d="M71.6 5.6v3" stroke="#F4F2EE" stroke-opacity=".5" stroke-width="1.6" stroke-linecap="round"/>
+  </svg>
+</div>
+
+<main class="grid">
+  <header class="t title">
+    <small>Cumartesi alışverişi</small>
+    <h1>Market</h1>
+  </header>
+  <div class="t count"><b>5</b><span>kaldı</span></div>
+
+  <form class="t add" onsubmit="return false"><input type="text" placeholder="Ne alacaksın?" aria-label="Ne alacaksın?"></form>
+  <button class="t plus" aria-label="Ekle"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"><path d="M12 4v16M4 12h16"/></svg></button>
+
+  <section class="t aisle manav">
+    <div class="hd">
+      <div><b class="n">2</b><h2>Manav</h2></div>
+      <svg width="52" height="52" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M24 14c-8.5 0-15 5.8-15 13.5S15.5 42 24 42s15-6.8 15-14.5S32.5 14 24 14z"/>
+        <path d="M24 14v-6M24 14c-2.5-3-6.5-3.5-9-2.5M24 14c2.5-3 6.5-3.5 9-2.5M24 14c-1-3-3.5-5-6-5.5M24 14c1-3 3.5-5 6-5.5"/>
+        <path d="M15.5 26c.5-3 2.5-5 5-6"/>
+      </svg>
+    </div>
+    <ul>
+      <li><b class="box"></b>Domates<span class="q">1 kg</span></li>
+      <li><b class="box"></b>Muz<span class="q">6 adet</span></li>
+    </ul>
+  </section>
+
+  <section class="t aisle temiz">
+    <div class="hd">
+      <div><b class="n">1</b><h2>Temizlik</h2></div>
+    </div>
+    <svg style="position:absolute;right:14px;top:16px" width="38" height="38" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M20 6h8v6M18 12h12l3 6v22a2 2 0 0 1-2 2H17a2 2 0 0 1-2-2V18z"/>
+      <path d="M15 24h18M15 34h18"/>
+      <circle cx="39" cy="10" r="3"/><circle cx="41" cy="18" r="1.6"/>
+    </svg>
+    <ul>
+      <li><b class="box"></b>Bulaşık deterjanı</li>
+    </ul>
+  </section>
+
+  <section class="t aisle alindi">
+    <div class="hd">
+      <div><b class="n">2</b><h2>Alındı</h2></div>
+      <svg width="32" height="32" viewBox="0 0 48 48" fill="none" stroke="var(--lime)" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M10 25l9 9 19-20"/></svg>
+    </div>
+    <ul>
+      <li><b class="chk"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></b><span>Ekmek</span></li>
+      <li><b class="chk"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></b><span>Beyaz peynir</span></li>
+    </ul>
+  </section>
+
+  <section class="t aisle kahv">
+    <div class="hd">
+      <div><b class="n">2</b><h2>Kahvaltılık</h2></div>
+      <svg width="52" height="52" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M24 8c-6 0-10 9-10 17a10 10 0 0 0 20 0c0-8-4-17-10-17z"/>
+        <path d="M19 22c.5-3 1.8-5.5 3.5-7"/>
+        <path d="M14 42h20"/>
+      </svg>
+    </div>
+    <ul>
+      <li><b class="box"></b>Süt<span class="q">2</span></li>
+      <li><b class="box"></b>Yumurta<span class="q">30'lu</span></li>
+    </ul>
+  </section>
+</main>
+
+<nav class="tabs">
+  <a class="on" href="#">
+    <svg width="22" height="22" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 8h6l5 24h22l4-16H14"/><circle cx="19" cy="40" r="2.6"/><circle cx="36" cy="40" r="2.6"/></svg>
+    Market
+  </a>
+  <a href="#">
+    <svg width="22" height="22" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"><path d="M24 40S7 30 7 18a8.5 8.5 0 0 1 17-2 8.5 8.5 0 0 1 17 2c0 12-17 22-17 22z"/></svg>
+    İstekler
+  </a>
+</nav>
+<div class="home"></div>
+
+</body>
+</html>
