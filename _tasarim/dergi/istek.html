@@ -1,0 +1,255 @@
+<!doctype html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=390, initial-scale=1">
+<title>İstekler</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400..700;1,6..96,400..700&family=Jost:wght@400;500&display=swap&subset=latin-ext" rel="stylesheet">
+<!-- Bodoni Moda has no Turkish lira sign; borrow only that glyph from a matching high-contrast Didone -->
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+Display:ital,wght@0,400;1,400&text=%E2%82%BA&display=swap" rel="stylesheet">
+<style>
+:root{
+  --paper:#F2EADC;
+  --ink:#231E1A;
+  --ink2:#6A6056;
+  --mute:#8E8376;
+  --rule:rgba(35,30,26,.2);
+  --ox:#7C2332;
+  --serif:"Bodoni Moda","Didot","Bodoni 72",serif;
+  --sans:"Jost","Futura",sans-serif;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{width:390px;height:844px;margin:0;overflow:hidden}
+body{
+  position:relative;
+  background:var(--paper);
+  color:var(--ink);
+  font-family:var(--serif);
+  font-optical-sizing:auto;
+  -webkit-font-smoothing:antialiased;
+}
+body::before{
+  content:"";position:absolute;inset:0;pointer-events:none;z-index:5;
+  background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='240' height='240'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 .14  0 0 0 0 .11  0 0 0 0 .08  0 0 0 .55 0'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>");
+  opacity:.16;mix-blend-mode:multiply;
+}
+body::after{
+  content:"";position:absolute;inset:0;pointer-events:none;z-index:4;
+  background:radial-gradient(120% 90% at 50% 40%, transparent 60%, rgba(120,90,60,.07) 100%);
+}
+.status{position:absolute;top:0;left:0;right:0;height:54px;display:flex;align-items:center;justify-content:space-between;padding:6px 26px 0 34px}
+.time{font-family:var(--sans);font-weight:500;font-size:16px;letter-spacing:.02em}
+.sys{display:block}
+
+.mast{position:absolute;top:56px;left:24px;right:24px}
+.scotch{height:6px;border-top:2px solid var(--ink);border-bottom:1px solid var(--ink)}
+h1{font-weight:400;font-size:78px;line-height:.92;letter-spacing:-.03em;font-variation-settings:"opsz" 96;padding-top:30px}
+
+.total{display:flex;align-items:baseline;gap:12px;height:48px;padding-top:4px}
+.total > span{font-family:var(--sans);font-size:12px;font-weight:500;letter-spacing:.24em;text-transform:uppercase;color:var(--ink2)}
+.total .lead{flex:1;height:4px;align-self:auto;background:radial-gradient(circle,var(--mute) .85px,transparent 1.15px) 0 50%/6px 4px repeat-x}
+.total em{font-style:italic;font-size:38px;line-height:1;color:var(--ox);font-variation-settings:"opsz" 40;letter-spacing:-.005em}
+.cur{font-family:"Noto Serif Display",var(--serif);font-size:.6em;margin-right:.1em;position:relative;top:-.36em}
+
+.filter{position:absolute;top:212px;left:24px;right:24px;height:44px;display:flex;align-items:stretch;justify-content:space-between;border-top:1px solid var(--rule);border-bottom:1px solid var(--ink)}
+.filter a{display:flex;align-items:center;justify-content:center;min-width:44px;padding:0 10px;text-decoration:none;font-family:var(--sans);font-size:12.5px;font-weight:500;letter-spacing:.2em;text-transform:uppercase;color:var(--ink2);position:relative}
+.filter a:first-child{margin-left:-10px}
+.filter a:last-child{margin-right:-10px;padding-right:calc(10px - .2em)}
+.filter a.on{color:var(--ink)}
+.filter a.on::after{content:"";position:absolute;left:10px;right:calc(10px + .2em);bottom:-1px;height:2px;background:var(--ox)}
+
+.grid{position:absolute;top:256px;left:24px;right:24px;height:494px;display:grid;grid-template-columns:1fr 1fr;grid-template-rows:1fr 1fr}
+.item{display:flex;flex-direction:column;padding:12px 0 14px 0;min-width:0}
+.item:nth-child(odd){padding-right:14px;border-right:1px solid var(--rule)}
+.item:nth-child(even){padding-left:14px}
+.item:nth-child(-n+2){border-bottom:1px solid var(--rule)}
+.meta{display:flex;align-items:baseline;justify-content:space-between;height:18px}
+.meta i{font-style:italic;font-size:16px;color:var(--ox);font-variation-settings:"opsz" 20}
+.meta b{font-family:var(--sans);font-weight:500;font-size:11px;letter-spacing:.2em;margin-right:-.2em;text-transform:uppercase;color:var(--ink2)}
+.meta b.hi{color:var(--ox)}
+.meta b.hi::before{content:"";display:inline-block;width:6px;height:6px;background:var(--ox);transform:rotate(45deg) translateY(-1px);margin-right:7px}
+.art{display:block;width:100%;height:82px;margin:5px 0 8px}
+.nm{font-size:19px;line-height:1.12;font-variation-settings:"opsz" 24}
+.st{font-family:var(--sans);font-weight:500;font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--ink2);margin-top:7px}
+.pr{margin-top:auto;font-size:33px;line-height:1;letter-spacing:-.005em;font-variation-settings:"opsz" 28}
+
+.tabs{position:absolute;left:0;right:0;bottom:34px;height:52px;display:flex;padding:0 24px}
+.tabs::before{content:"";position:absolute;left:24px;right:24px;top:0;height:1px;background:var(--ink)}
+.tabs a{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;padding-top:6px;color:var(--mute);text-decoration:none}
+.tabs a span{font-family:var(--sans);font-size:11px;font-weight:500;letter-spacing:.24em;text-transform:uppercase;padding-left:.24em;position:relative}
+.tabs a.on{color:var(--ink)}
+.tabs a.on span::after{content:"";position:absolute;left:50%;bottom:-6px;width:18px;height:2px;margin-left:-9px;background:var(--ox)}
+.home{position:absolute;bottom:8px;left:50%;width:134px;height:5px;margin-left:-67px;border-radius:3px;background:var(--ink)}
+</style>
+</head>
+<body>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <pattern id="hatch" width="3.2" height="3.2" patternUnits="userSpaceOnUse" patternTransform="rotate(45)">
+      <line x1="0" y1="0" x2="0" y2="3.2" stroke="#A1968A" stroke-width=".9"/>
+    </pattern>
+  </defs>
+</svg>
+
+<div class="status">
+  <span class="time">9:41</span>
+  <svg class="sys" width="74" height="14" viewBox="0 0 74 14" fill="none">
+    <g fill="#231E1A">
+      <rect x="1" y="9" width="2.2" height="3.6"/>
+      <rect x="5.2" y="6.6" width="2.2" height="6"/>
+      <rect x="9.4" y="4.2" width="2.2" height="8.4"/>
+      <rect x="13.6" y="1.6" width="2.2" height="11"/>
+    </g>
+    <g stroke="#231E1A" stroke-width="1.4" stroke-linecap="round">
+      <path d="M28.2 9.6a3.3 3.3 0 0 1 4.6 0"/>
+      <path d="M25.7 7.1a6.8 6.8 0 0 1 9.6 0"/>
+      <path d="M23.2 4.6a10.3 10.3 0 0 1 14.6 0"/>
+    </g>
+    <circle cx="30.5" cy="12" r="1.1" fill="#231E1A"/>
+    <rect x="45.5" y="1.8" width="24" height="10.6" rx="2.6" stroke="#231E1A" stroke-width="1"/>
+    <rect x="47.5" y="3.8" width="17" height="6.6" rx="1.2" fill="#231E1A"/>
+    <path d="M71.6 5.6v3" stroke="#231E1A" stroke-width="1.6" stroke-linecap="round"/>
+  </svg>
+</div>
+
+<header class="mast">
+  <div class="scotch"></div>
+  <h1>İstekler</h1>
+  <div class="total"><span>Toplam</span><b class="lead"></b><em><span class="cur">₺</span>12.740</em></div>
+</header>
+
+<nav class="filter">
+  <a class="on" href="#">Hepsi</a>
+  <a href="#">Giyim</a>
+  <a href="#">Ev</a>
+  <a href="#">Teknoloji</a>
+</nav>
+
+<main class="grid">
+  <!-- 01 sneaker -->
+  <article class="item">
+    <div class="meta"><i>01</i><b class="hi">Öncelikli</b></div>
+    <svg class="art" viewBox="0 0 160 100" fill="none" stroke="#231E1A" stroke-width="1.1" stroke-linecap="round" stroke-linejoin="round">
+      <ellipse cx="84" cy="93" rx="60" ry="3.6" fill="url(#hatch)" stroke="none"/>
+      <path d="M26 77C24 65 24 55 27 47c6-2 13-1 20 4 5 3 10 0 13-6 2-5 8-7 12-4 6 6 16 11 28 15 14 4 28 6 36 11 5 3 7 7 6 10"/>
+      <path d="M21 77h122c5 0 6 10-1 11H28c-7 0-10-6-7-11z"/>
+      <path d="M25 82.4h117" stroke="#A1968A" stroke-dasharray="2 2.6"/>
+      <path d="M27 58c8 0 13 6 14 19"/>
+      <path d="M28 50c6-1 12 1 17 5"/>
+      <path d="M118 62c4 5 6 10 6 15"/>
+      <path d="M50 67c18-3 40-5 60-3" stroke="#A1968A"/>
+      <g stroke="#7C2332" stroke-width="1.2">
+        <path d="M62 50l9-6M68 53l9-6M74 56l9-6M80 59l9-6"/>
+        <path d="M64 47c-4 5-7 9-5 15"/>
+        <path d="M65 46c3-4 7-5 6-1"/>
+      </g>
+    </svg>
+    <div class="nm">Beyaz spor ayakkabı</div>
+    <div class="st">Zara</div>
+    <div class="pr"><span class="cur">₺</span>2.499</div>
+  </article>
+
+  <!-- 02 trench -->
+  <article class="item">
+    <div class="meta"><i>02</i><b class="hi">Öncelikli</b></div>
+    <svg class="art" viewBox="0 0 160 100" fill="none" stroke="#231E1A" stroke-width="1.1" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M80 7.5V4.6C80 1.6 84 .8 85.2 3.2"/>
+      <path d="M67 9c6-2.4 20-2.4 26 0"/>
+      <path d="M67 9l-6 7.5 10 17L80 40M93 9l6 7.5-10 17L80 40"/>
+      <path d="M67 9l-17 5.5c-5 1.6-7.4 5.4-8 11L36.5 76l8.6 1.8 4.6-42.8"/>
+      <path d="M93 9l17 5.5c5 1.6 7.4 5.4 8 11l5.5 50.5-8.6 1.8-4.6-42.8"/>
+      <path d="M49.8 33.5L46 95.5c20 2.6 48 2.6 68 0l-3.8-62"/>
+      <path d="M86 40c.2 20 .8 38 1.8 56.4"/>
+      <path d="M52.5 13.4l11.6-3.2M107.5 13.4L96 10.2" stroke="#A1968A"/>
+      <path d="M96 15l6.5 11 6-5.5" stroke="#A1968A"/>
+      <path d="M56 70l3.2 9.5M104 70l-3.2 9.5"/>
+      <path d="M37.2 70l8.2 1.6M122.8 70l-8.2 1.6" stroke="#A1968A"/>
+      <g fill="#231E1A" stroke="none">
+        <circle cx="73.4" cy="45" r="1.5"/><circle cx="90.6" cy="45" r="1.5"/>
+        <circle cx="73.4" cy="52.5" r="1.5"/><circle cx="90.6" cy="52.5" r="1.5"/>
+        <circle cx="73.4" cy="74" r="1.5"/><circle cx="90.6" cy="74" r="1.5"/>
+      </g>
+      <g stroke="#7C2332" stroke-width="1.2">
+        <path d="M49 58.5c20 2 42 2 62 0M48.7 64.5c20 2 42.6 2 62.6 0"/>
+        <rect x="88.5" y="57.6" width="8" height="8.6" rx=".6"/>
+        <path d="M96.5 62c3 5 4 10 2.6 17"/>
+      </g>
+    </svg>
+    <div class="nm">Trençkot</div>
+    <div class="st">Mango</div>
+    <div class="pr"><span class="cur">₺</span>3.990</div>
+  </article>
+
+  <!-- 03 coffee machine -->
+  <article class="item">
+    <div class="meta"><i>03</i><b>Bekleyebilir</b></div>
+    <svg class="art" viewBox="0 0 160 100" fill="none" stroke="#231E1A" stroke-width="1.1" stroke-linecap="round" stroke-linejoin="round">
+      <ellipse cx="80" cy="96.6" rx="40" ry="2.6" fill="url(#hatch)" stroke="none"/>
+      <path d="M51 10h58"/>
+      <path d="M54 12.5h52V89H54z"/>
+      <circle cx="69" cy="26" r="7"/>
+      <path d="M69 26l3.6-4" stroke="#7C2332"/>
+      <circle cx="93" cy="26" r="3.6"/>
+      <path d="M54 40h52" stroke="#A1968A"/>
+      <path d="M63 46h28v5H63z"/>
+      <path d="M67 51h20c0 4-4 6.5-10 6.5S67 55 67 51z"/>
+      <path d="M86.5 54.5l25 4.4c2 .4 1.6 3.4-.4 3.1l-25-3.6"/>
+      <path d="M75 57.5v3.6M79 57.5v3.6"/>
+      <path d="M75.6 62.5v10M78.4 62.5v10" stroke="#7C2332" stroke-dasharray="1.6 2"/>
+      <path d="M67.5 74h19v5.5c0 4.4-4 7.5-9.5 7.5s-9.5-3.1-9.5-7.5z"/>
+      <path d="M86.5 76c5 0 5 6-.6 6"/>
+      <path d="M49.5 89h61v5.5h-61z"/>
+      <path d="M106 44c9 0 11 12 9 30" />
+    </svg>
+    <div class="nm">Kahve makinesi</div>
+    <div class="st">Trendyol</div>
+    <div class="pr"><span class="cur">₺</span>4.251</div>
+  </article>
+
+  <!-- 04 headphones -->
+  <article class="item">
+    <div class="meta"><i>04</i><b>Bekleyebilir</b></div>
+    <svg class="art" viewBox="0 0 160 100" fill="none" stroke="#231E1A" stroke-width="1.1" stroke-linecap="round" stroke-linejoin="round">
+      <ellipse cx="80" cy="97" rx="46" ry="2.4" fill="url(#hatch)" stroke="none"/>
+      <path d="M46 60C44 26 62 7 80 7s36 19 34 53"/>
+      <path d="M52 58c-1-27 13-44 28-44s29 17 28 44"/>
+      <path d="M58.5 33C63 22 71 16.5 80 16.5S97 22 101.5 33" stroke="#7C2332" stroke-dasharray="2 2.4"/>
+      <path d="M46.5 60v5M51.8 58v7M113.5 60v5M108.2 58v7"/>
+      <rect x="37" y="64" width="22" height="31" rx="10"/>
+      <path d="M59 68c4.4 2.6 4.4 21.4 0 24"/>
+      <rect x="101" y="64" width="22" height="31" rx="10"/>
+      <path d="M101 68c-4.4 2.6-4.4 21.4 0 24"/>
+      <path d="M42 71v17M118 71v17" stroke="#A1968A"/>
+    </svg>
+    <div class="nm">Kulaklık</div>
+    <div class="st">Hepsiburada</div>
+    <div class="pr"><span class="cur">₺</span>2.000</div>
+  </article>
+</main>
+
+<nav class="tabs">
+  <a href="#">
+    <svg width="26" height="26" viewBox="0 0 26 26" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M7.4 11C7.4 5.2 18.6 5.2 18.6 11"/>
+      <path d="M3.8 11h18.4"/>
+      <path d="M5.2 11l1.9 11h11.8l1.9-11"/>
+      <path d="M9.6 11l.8 11M13 11v11M16.4 11l-.8 11M5.9 15.2h14.2M6.6 19h12.8" opacity=".5"/>
+    </svg>
+    <span>Market</span>
+  </a>
+  <a class="on" href="#">
+    <svg width="26" height="26" viewBox="0 0 26 26" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M13.4 3.6h8c.6 0 1 .4 1 1v8L12.5 22.5c-.4.4-1 .4-1.4 0l-7.6-7.6c-.4-.4-.4-1 0-1.4z"/>
+      <circle cx="18.2" cy="7.8" r="1.6"/>
+      <path d="M8.6 14.6l4.8 4.8" opacity=".55"/>
+    </svg>
+    <span>İstekler</span>
+  </a>
+</nav>
+<div class="home"></div>
+
+</body>
+</html>

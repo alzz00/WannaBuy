@@ -1,0 +1,298 @@
+<!doctype html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=390, initial-scale=1">
+<title>İstekler Fişi</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Doto:wght,ROND@400..900,0..100&family=IBM+Plex+Mono:wght@400;500;600;700&family=JetBrains+Mono:wght@500;700;800&display=block">
+<style>
+:root{
+  --belt:#221f1c;
+  --paper:#f3eee2;
+  --paper-d:#e7e0d0;
+  --ink:#2f2a25;
+  --ink-2:#5b534a;
+  --ink-3:#7f7569;
+  --red:#c13f2b;
+  --mono:'IBM Plex Mono','JetBrains Mono',ui-monospace,monospace;
+  --dot:'Doto','IBM Plex Mono',monospace;
+  --noise:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 .36 0 0 0 0 .29 0 0 0 0 .2 .9 0 0 0 -.36'/%3E%3C/filter%3E%3Crect width='180' height='180' filter='url(%23n)'/%3E%3C/svg%3E");
+  --grunge:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='2' seed='7' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 -3 0 0 0 2.45'/%3E%3C/filter%3E%3Crect width='140' height='140' filter='url(%23g)'/%3E%3C/svg%3E");
+}
+*{box-sizing:border-box}
+html,body{width:390px;height:844px;margin:0;overflow:hidden}
+body{
+  position:relative;
+  font-family:var(--mono);
+  color:var(--ink);
+  background:
+    radial-gradient(120% 60% at 50% 30%, rgba(255,236,210,.07), transparent 65%),
+    repeating-linear-gradient(180deg, rgba(255,255,255,.05) 0 1px, rgba(0,0,0,.28) 1px 3px, transparent 3px 9px),
+    var(--belt);
+  -webkit-font-smoothing:antialiased;
+}
+button{font:inherit;color:inherit;background:none;border:0;padding:0;margin:0}
+.tl{font-family:'JetBrains Mono','IBM Plex Mono',monospace;font-weight:700}
+
+/* ---------- status bar ---------- */
+.sb{position:absolute;inset:0 0 auto 0;height:54px;color:var(--paper);z-index:10}
+.sb .clock{position:absolute;left:34px;top:17px;font:600 17px/20px var(--mono);letter-spacing:.02em}
+.sb .ic{position:absolute;right:26px;top:20px;display:flex;gap:7px;align-items:center}
+.bm{display:inline-block;color:currentColor}
+.bm svg{display:block;width:100%;height:100%;overflow:visible}
+.bm circle{fill:currentColor}
+.bm .r{fill:var(--red)}
+.bat{width:27px;height:13px}
+
+/* ---------- printer slot ---------- */
+.slot{position:absolute;top:56px;left:9px;right:9px;height:14px;border-radius:7px;z-index:6;
+  background:linear-gradient(#070605,#15130f 70%,#24201b);
+  box-shadow:inset 0 2px 3px rgba(0,0,0,.95),0 1px 0 rgba(255,255,255,.1),0 -1px 0 rgba(0,0,0,.6)}
+
+/* ---------- receipt paper ---------- */
+.wrap{position:absolute;top:63px;left:18px;width:354px;z-index:3;
+  filter:drop-shadow(0 1px 0 rgba(0,0,0,.45)) drop-shadow(0 12px 12px rgba(0,0,0,.5))}
+.paper{position:relative;padding:21px 22px 21px;
+  background:
+    linear-gradient(180deg,rgba(40,25,10,.28),rgba(40,25,10,0) 18px),
+    linear-gradient(90deg,rgba(110,80,40,.07),transparent 9%,transparent 91%,rgba(110,80,40,.08)),
+    var(--noise),
+    var(--paper);
+  -webkit-mask:linear-gradient(#000 0 0) top/100% calc(100% - 9px) no-repeat,
+    conic-gradient(from -45deg at bottom,#0000,#000 1deg 89deg,#0000 90deg) bottom/14px 9px repeat-x;
+          mask:linear-gradient(#000 0 0) top/100% calc(100% - 9px) no-repeat,
+    conic-gradient(from -45deg at bottom,#0000,#000 1deg 89deg,#0000 90deg) bottom/14px 9px repeat-x;
+}
+
+.hd{display:flex;align-items:flex-end;justify-content:space-between}
+h1{margin:0;font-family:var(--dot);font-weight:900;font-size:50px;line-height:.9;letter-spacing:.01em;
+  font-variation-settings:"ROND" 100}
+.pen{fill:none;stroke:var(--red);stroke-width:2.3;stroke-linecap:round;stroke-linejoin:round;opacity:.92}
+.meta{display:flex;justify-content:space-between;margin-top:10px;font-size:13px;letter-spacing:.12em;color:var(--ink-3)}
+.rule{height:2px;margin:12px 0 14px;background:repeating-linear-gradient(90deg,var(--ink-2) 0 7px,transparent 7px 11px);opacity:.75}
+.ld{flex:1;height:4px;margin-top:9px;min-width:14px;
+  background:radial-gradient(circle,var(--ink-3) 1.1px,transparent 1.5px) 0 50%/7px 4px repeat-x}
+
+/* filter */
+.flt{display:flex;gap:6px}
+.ch{flex:auto;height:44px;padding:0 8px;border:2px dashed var(--ink-3);font-weight:600;font-size:15px;letter-spacing:.05em;color:var(--ink-2)}
+.ch.on{background:var(--ink);border:2px solid var(--ink);color:var(--paper)}
+
+/* wish rows */
+.wi{display:flex;gap:14px;padding:8px 0 9px;align-items:flex-start}
+.wi+.wi{background:repeating-linear-gradient(90deg,var(--ink-3) 0 2px,transparent 2px 5px) top/100% 2px no-repeat}
+.th{width:64px;height:64px;flex:none;position:relative;margin-top:3px;
+  background:
+    linear-gradient(var(--ink-2),var(--ink-2)) 0 0/9px 2px no-repeat,
+    linear-gradient(var(--ink-2),var(--ink-2)) 0 0/2px 9px no-repeat,
+    linear-gradient(var(--ink-2),var(--ink-2)) 100% 0/9px 2px no-repeat,
+    linear-gradient(var(--ink-2),var(--ink-2)) 100% 0/2px 9px no-repeat,
+    linear-gradient(var(--ink-2),var(--ink-2)) 0 100%/9px 2px no-repeat,
+    linear-gradient(var(--ink-2),var(--ink-2)) 0 100%/2px 9px no-repeat,
+    linear-gradient(var(--ink-2),var(--ink-2)) 100% 100%/9px 2px no-repeat,
+    linear-gradient(var(--ink-2),var(--ink-2)) 100% 100%/2px 9px no-repeat}
+.th svg{position:absolute;left:3px;top:3px;width:58px;height:58px;overflow:visible}
+.th .d{fill:none;stroke:var(--ink);stroke-width:2.5;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:0 4.1}
+.th .s{fill:none;stroke:var(--ink);stroke-width:1.8;stroke-linecap:square;stroke-linejoin:miter}
+.th .k{fill:var(--ink)}
+.th .f{fill:var(--red);opacity:.88;mix-blend-mode:multiply}
+.wx{flex:1;min-width:0}
+.wn{font-size:17px;font-weight:600;letter-spacing:.03em;line-height:21px;white-space:nowrap}
+.wl{display:flex;align-items:center;height:25px;margin-top:1px}
+.wl .ld{margin:8px 8px 0}
+.ws{font-size:14px;letter-spacing:.14em;color:var(--ink-2)}
+.wp{font-size:18px;font-weight:700;letter-spacing:.01em}
+.pr{display:inline-block;margin-top:4px;font-size:13px;font-weight:700;letter-spacing:.18em;line-height:1;padding:4px 7px 3px 9px}
+.pr.hi{color:var(--red);border:2px solid var(--red);transform:rotate(-3deg);transform-origin:left center;
+  -webkit-mask:var(--grunge);mask:var(--grunge)}
+.pr.lo{color:var(--ink-2);border:2px dashed var(--ink-3);font-weight:600}
+
+/* total */
+.dbl{height:6px;margin:2px 0 0;
+  background:
+    repeating-linear-gradient(90deg,var(--ink) 0 7px,transparent 7px 10px) top/100% 2px no-repeat,
+    repeating-linear-gradient(90deg,var(--ink) 0 7px,transparent 7px 10px) bottom/100% 2px no-repeat}
+.tot{display:flex;align-items:center;height:46px}
+.tot .tk{font-weight:700;font-size:17px;letter-spacing:.2em}
+.tot .ld{margin:8px 10px 0}
+.tot .tv{font-size:28px;font-weight:700;letter-spacing:-.01em}
+.bc{margin-top:10px}
+.bc svg{display:block;width:100%;height:32px}
+.bcn{display:flex;justify-content:space-between;margin-top:3px;font-size:11px;letter-spacing:.3em;color:var(--ink-2)}
+
+/* ---------- tab strip ---------- */
+.tabwrap{position:absolute;left:0;right:0;bottom:0;z-index:4;filter:drop-shadow(0 -6px 10px rgba(0,0,0,.45))}
+.tabs{height:90px;padding:12px 16px 34px;display:flex;align-items:center;
+  background:var(--noise),var(--paper);
+  -webkit-mask:linear-gradient(#000 0 0) bottom/100% calc(100% - 8px) no-repeat,
+    conic-gradient(from 135deg at top,#0000,#000 1deg 89deg,#0000 90deg) top/14px 8px repeat-x;
+          mask:linear-gradient(#000 0 0) bottom/100% calc(100% - 8px) no-repeat,
+    conic-gradient(from 135deg at top,#0000,#000 1deg 89deg,#0000 90deg) top/14px 8px repeat-x}
+.tab{flex:1;height:44px;display:flex;align-items:center;justify-content:center;gap:10px;
+  font-weight:700;font-size:15px;letter-spacing:.16em;color:var(--ink-2)}
+.tab .bm{width:24px;height:24px}
+.tab.on{background:var(--ink);color:var(--paper)}
+.perf{width:0;height:38px;border-left:2px dotted var(--ink-3);margin:0 12px}
+</style>
+</head>
+<body>
+
+<div class="sb">
+  <span class="clock">9:41</span>
+  <div class="ic">
+    <span class="bm" data-bm="sig" style="width:19px;height:13px"></span>
+    <span class="bm" data-bm="wifi" style="width:17px;height:13px"></span>
+    <svg class="bat" viewBox="0 0 27 13"><rect x="1" y="1" width="22" height="11" fill="none" stroke="currentColor" stroke-width="1.6"/><rect x="24" y="4" width="2.2" height="5" fill="currentColor"/><rect x="3.2" y="3.2" width="4" height="6.6" fill="currentColor"/><rect x="8.4" y="3.2" width="4" height="6.6" fill="currentColor"/><rect x="13.6" y="3.2" width="4" height="6.6" fill="currentColor"/></svg>
+  </div>
+</div>
+
+<div class="slot"></div>
+
+<div class="wrap"><div class="paper">
+  <div class="hd"><h1>İSTEKLER</h1></div>
+  <div class="meta"><span>28.09.2026</span><span>09:41</span><span>#0006</span></div>
+  <div class="rule"></div>
+
+  <div class="flt">
+    <button class="ch on">HEPSİ</button><button class="ch">GİYİM</button><button class="ch">EV</button><button class="ch">TEKNOLOJİ</button>
+  </div>
+
+  <article class="wi" style="margin-top:4px">
+    <div class="th"><svg viewBox="0 0 64 64">
+      <path class="f" transform="translate(2 2)" d="M7 44 H59 Q61 44 61 47 V51 H7 Z"/>
+      <path class="d" d="M9 44 V25 Q9 21 13 21 H21 Q24 21 25.5 24 L29 31 Q42 33 51 37 Q59 40 59 44"/>
+      <path class="s" d="M7 44 H60 M7 44 V50 H61 V47"/>
+      <path class="s" d="M28 29 L24 35 M32.5 31 L28.5 37 M37 32.5 L33 38.5"/>
+      <path class="s" d="M9 28 H14"/>
+    </svg></div>
+    <div class="wx">
+      <div class="wn">BEYAZ SPOR AYAKKABI</div>
+      <div class="wl"><span class="ws">ZARA</span><i class="ld"></i><b class="wp"><span class="tl">₺</span>2.499</b></div>
+      <span class="pr hi">ÖNCELİKLİ</span>
+    </div>
+  </article>
+
+  <article class="wi">
+    <div class="th"><svg viewBox="0 0 64 64">
+      <path class="f" transform="translate(2 2)" d="M14 33 H50 V38 H14 Z"/>
+      <path class="d" d="M24 7 H40 L50 17 L53 58 H11 L14 17 Z"/>
+      <path class="d" d="M14 17 L7 45 L12 47 L17 31"/>
+      <path class="d" d="M50 17 L57 45 L52 47 L47 31"/>
+      <path class="s" d="M24 7 L32 23 L40 7"/>
+      <path class="s" d="M32 23 V58"/>
+      <path class="s" d="M14 33 H50 M14 38 H50"/>
+      <rect class="s" x="29" y="32" width="6" height="7"/>
+      <circle class="k" cx="27.5" cy="27" r="1.7"/><circle class="k" cx="36.5" cy="27" r="1.7"/>
+      <circle class="k" cx="27.5" cy="45" r="1.7"/><circle class="k" cx="36.5" cy="45" r="1.7"/>
+    </svg></div>
+    <div class="wx">
+      <div class="wn">TRENÇKOT</div>
+      <div class="wl"><span class="ws">MANGO</span><i class="ld"></i><b class="wp"><span class="tl">₺</span>3.990</b></div>
+      <span class="pr hi">ÖNCELİKLİ</span>
+    </div>
+  </article>
+
+  <article class="wi">
+    <div class="th"><svg viewBox="0 0 64 64">
+      <path class="f" transform="translate(2 2)" d="M25 38 H39 V46 Q39 50 35 50 H29 Q25 50 25 46 Z"/>
+      <path class="d" d="M12 7 H52 V57 H12 Z"/>
+      <path class="d" d="M12 18 H52"/>
+      <path class="s" d="M21 23 H43 V29 H21 Z M43 26 H56"/>
+      <path class="s" d="M25 38 H39 V46 Q39 50 35 50 H29 Q25 50 25 46 Z M39 40 Q43 40 43 43 Q43 46 39 46"/>
+      <path class="s" d="M30 32 V34 M34 32 V34"/>
+      <path class="s" d="M16 53 H48"/>
+      <circle class="k" cx="18" cy="12.5" r="1.8"/><circle class="k" cx="24" cy="12.5" r="1.8"/>
+      <circle class="s" cx="45" cy="12.5" r="2.6"/>
+    </svg></div>
+    <div class="wx">
+      <div class="wn">KAHVE MAKİNESİ</div>
+      <div class="wl"><span class="ws">TRENDYOL</span><i class="ld"></i><b class="wp"><span class="tl">₺</span>4.251</b></div>
+      <span class="pr lo">BEKLEYEBİLİR</span>
+    </div>
+  </article>
+
+  <article class="wi">
+    <div class="th"><svg viewBox="0 0 64 64">
+      <rect class="f" transform="translate(2 2)" x="8" y="34" width="11" height="19" rx="3.5"/>
+      <rect class="f" transform="translate(2 2)" x="45" y="34" width="11" height="19" rx="3.5"/>
+      <path class="d" d="M13 36 V30 A19 19 0 0 1 51 30 V36"/>
+      <path class="s" d="M17 31 A15 15 0 0 1 47 31"/>
+      <rect class="s" x="8" y="34" width="11" height="19" rx="3.5"/>
+      <rect class="s" x="45" y="34" width="11" height="19" rx="3.5"/>
+    </svg></div>
+    <div class="wx">
+      <div class="wn">KULAKLIK</div>
+      <div class="wl"><span class="ws">HEPSİBURADA</span><i class="ld"></i><b class="wp"><span class="tl">₺</span>2.000</b></div>
+      <span class="pr lo">BEKLEYEBİLİR</span>
+    </div>
+  </article>
+
+  <div class="dbl"></div>
+  <div class="tot"><span class="tk">TOPLAM</span><i class="ld"></i><b class="tv"><span class="tl">₺</span>12.740</b></div>
+  <div class="dbl" style="margin:0"></div>
+  <div class="bc"><svg id="bc" viewBox="0 0 310 40" preserveAspectRatio="none"></svg>
+    <div class="bcn"><span>8</span><span>690512</span><span>127409</span></div></div>
+</div></div>
+
+<div class="tabwrap"><nav class="tabs">
+  <button class="tab"><span class="bm" data-bm="basket"></span>MARKET</button>
+  <i class="perf"></i>
+  <button class="tab on"><span class="bm" data-bm="tag"></span>İSTEKLER</button>
+</nav></div>
+
+<script>
+const B={
+  sig:["......#","....#.#","..#.#.#","#.#.#.#"],
+  wifi:[".#####.","#.....#","..###..",".......","...#..."],
+  basket:[
+    "....#..#....",
+    "...#....#...",
+    "..#......#..",
+    "############",
+    "############",
+    ".#.#.##.#.#.",
+    ".#.#.##.#.#.",
+    ".#.#.##.#.#.",
+    "..#.#..#.#..",
+    "..########..",
+    "............",
+    "............"],
+  tag:[
+    "......######",
+    ".....#######",
+    "....####..##",
+    "...#####..##",
+    "..##########",
+    ".##########.",
+    "##########..",
+    ".########...",
+    "..######....",
+    "...####.....",
+    "....##......",
+    "............"]
+};
+document.querySelectorAll('[data-bm]').forEach(el=>{
+  const rows=B[el.dataset.bm];const h=rows.length,w=Math.max(...rows.map(r=>r.length));
+  let s='<svg viewBox="0 0 '+w+' '+h+'" preserveAspectRatio="xMidYMid meet">';
+  rows.forEach((r,y)=>[...r].forEach((c,x)=>{if(c!=='.')s+='<circle'+(c==='r'?' class="r"':'')+' cx="'+(x+.5)+'" cy="'+(y+.5)+'" r=".43"/>';}));
+  el.innerHTML=s+'</svg>';
+});
+/* barcode: deterministic bars */
+(function(){
+  const svg=document.getElementById('bc');let x=0,seed=12740,out='',bar=true;
+  const rnd=()=>{seed=(seed*9301+49297)%233280;return seed/233280};
+  const guard=()=>{out+='<rect x="'+x+'" y="0" width="2" height="40" fill="#2f2a25"/>';x+=4;out+='<rect x="'+x+'" y="0" width="2" height="40" fill="#2f2a25"/>';x+=4;};
+  guard();
+  while(x<296){const w=1+Math.floor(rnd()*3.2);let px=w*1.6;if(x+px>298)px=298-x;
+    if(bar)out+='<rect x="'+x.toFixed(1)+'" y="0" width="'+px.toFixed(1)+'" height="34" fill="#2f2a25"/>';
+    x+=px;bar=!bar;
+    if(Math.abs(x-150)<2 && !bar){}
+  }
+  x=302;out+='<rect x="302" y="0" width="2" height="40" fill="#2f2a25"/><rect x="306" y="0" width="2" height="40" fill="#2f2a25"/>';
+  svg.innerHTML=out;
+})();
+</script>
+</body>
+</html>

@@ -31,8 +31,14 @@ Yayın: GitHub Pages, https://alzz00.github.io/WannaBuy/ (adres büyük/küçük
 
 ## Durum
 
-- 2026-09-28: 5 farklı tasarım yönü hazırlandı: `_tasarim/<yön>/market.html` ve `istek.html` (+ `.png`).
-  Yönler: fis (market fişi), defter (el yazısı not defteri), brutal (neo-brütal), dergi (dergi sayfası), retro (70'ler).
+- 2026-09-28: 5 farklı tasarım yönü hazırlandı ve kullanıcıya resim olarak gönderildi (numaralar bu sırayla):
+  1. **Fiş** (`fis`): termal fiş, Doto (nokta vuruşlu başlık) + IBM Plex Mono, ₺ JetBrains Mono'dan; ikonlar ve barkod JS ile çiziliyor.
+  2. **Defter** (`defter`): çizgili defter, Caveat + Caveat Brush + Courier Prime, mavi tükenmez, kraft kapak.
+  3. **Neo-brütal** (`brutal`): kalın çerçeve + sert gölge, Bricolage Grotesque + Space Mono, asit sarı/pembe/lila/mint.
+  4. **Dergi** (`dergi`): krem kağıt, Bodoni Moda + Jost, bordo vurgu, ince çizgiler, 01/02 numaralama.
+  5. **70'ler** (`retro`): Shrikhand + Fraunces + Bricolage Grotesque, hardal/turuncu/kahve şeritler.
+  Dosyalar: `_tasarim/<yön>/market.html`, `istek.html`; karşılaştırma görselleri `_tasarim/hepsi.png`, `tek-<yön>.png`
+  (`node _tasarim/birlestir.js "$(cat _tasarim/liste.json)"` sayfaları üretir, sonra headless tarayıcıyla çekilir).
   Kullanıcı birini seçecek (ya da karıştıracak).
 - Sıradaki: seçilen yönle uygulamayı yap (`index.html` + `sw.js` + `manifest.webmanifest` + `ikonlar/`), görsellerini göster,
   "yükle" gelince yayınla. Şu an `index.html` sadece "yakında" sayfası.

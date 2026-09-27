@@ -1,0 +1,49 @@
+// Tasarım yönlerini telefon çerçevesi içinde yan yana gösteren sayfalar üretir.
+// node birlestir.js '<json: [{key, name, tagline}]>'
+'use strict';
+const fs = require('fs');
+const path = require('path');
+
+const dir = __dirname;
+const list = JSON.parse(process.argv[2]);
+
+const css = `
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { background: #E4E0DA; font-family: Georgia, "Times New Roman", serif; color: #2A2622; padding: 40px 44px 48px; }
+.row { display: flex; gap: 36px; }
+.col { width: 410px; }
+.label { height: 74px; display: flex; align-items: flex-start; gap: 14px; }
+.n { flex: none; width: 46px; height: 46px; border-radius: 50%; background: #2A2622; color: #F3EFE9; display: grid; place-items: center;
+     font: 700 24px/1 Georgia, serif; }
+.t b { display: block; font-size: 30px; line-height: 1.05; }
+.t span { display: block; font: 17px/1.3 "Segoe UI", sans-serif; color: #6F675F; margin-top: 3px; }
+.phone { width: 410px; height: 864px; border-radius: 60px; background: #151515; padding: 10px; position: relative;
+         box-shadow: 0 18px 44px rgba(40,30,20,.20); }
+.phone iframe { width: 390px; height: 844px; border: 0; border-radius: 50px; display: block; background: #fff; }
+.island { position: absolute; left: 145px; top: 21px; width: 120px; height: 35px; border-radius: 20px; background: #000; }
+.cap { font: 600 17px/1 "Segoe UI", sans-serif; color: #6F675F; text-align: center; margin-top: 14px; }
+.gap { height: 40px; }
+`;
+
+const phone = (key, file) =>
+  `<div class="phone"><iframe src="${key}/${file}.html" scrolling="no"></iframe><div class="island"></div></div>`;
+
+// 1) Hepsi: üst sıra Market, alt sıra İstekler
+{
+  const head = list.map((d, i) => `<div class="col"><div class="label"><div class="n">${i + 1}</div><div class="t"><b>${d.name}</b><span>${d.tagline}</span></div></div></div>`).join('');
+  const r1 = list.map(d => `<div class="col">${phone(d.key, 'market')}</div>`).join('');
+  const r2 = list.map(d => `<div class="col">${phone(d.key, 'istek')}</div>`).join('');
+  fs.writeFileSync(path.join(dir, 'hepsi.html'),
+    `<!doctype html><meta charset="utf-8"><style>${css}</style><div class="row">${head}</div><div class="row">${r1}</div><div class="gap"></div><div class="row">${r2}</div>`);
+}
+
+// 2) Her yön ayrı: Market + İstekler yan yana
+list.forEach((d, i) => {
+  fs.writeFileSync(path.join(dir, `tek-${d.key}.html`),
+    `<!doctype html><meta charset="utf-8"><style>${css}</style>` +
+    `<div class="label"><div class="n">${i + 1}</div><div class="t"><b>${d.name}</b><span>${d.tagline}</span></div></div>` +
+    `<div class="row"><div class="col">${phone(d.key, 'market')}<div class="cap">Market</div></div>` +
+    `<div class="col">${phone(d.key, 'istek')}<div class="cap">İstekler</div></div></div>`);
+});
+
+console.log('hazır:', ['hepsi.html', ...list.map(d => `tek-${d.key}.html`)].join(', '));

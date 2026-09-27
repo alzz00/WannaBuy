@@ -1,0 +1,236 @@
+<!doctype html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=390, initial-scale=1">
+<title>Market</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400..700&family=Caveat+Brush&family=Courier+Prime:wght@400;700&display=swap&subset=latin-ext" rel="stylesheet">
+<style>
+:root{
+  --paper:#f6f0e1;
+  --rule:rgba(96,140,196,.40);
+  --margin:rgba(214,78,70,.62);
+  --ink:#1f3d94;
+  --ink-soft:rgba(31,61,148,.52);
+  --dark:#28241f;
+  --red:#bf3a2b;
+  --pencil:#6c665d;
+  --kraft:#c49a6a;
+  --hand:'Caveat',cursive;
+  --type:'Courier Prime','Courier New',monospace;
+  --marker:'Caveat Brush','Caveat',cursive;
+}
+*{box-sizing:border-box}
+html,body{width:390px;height:844px;margin:0;overflow:hidden}
+body{background:var(--kraft);position:relative;-webkit-font-smoothing:antialiased;color:var(--ink)}
+
+/* ---------- kraft back cover (visible under the tab bar) ---------- */
+.cover{position:absolute;inset:0;
+  background:
+    url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='240' height='240'><filter id='k'><feTurbulence type='fractalNoise' baseFrequency='.9 .06' numOctaves='3' seed='7'/><feColorMatrix values='0 0 0 0 .25 0 0 0 0 .15 0 0 0 0 .05 .5 0 0 0 -.12'/></filter><rect width='240' height='240' filter='url(%23k)'/></svg>"),
+    linear-gradient(180deg,#c89f70,#b98e5e);
+}
+
+/* ---------- the sheet ---------- */
+.sheet{position:absolute;left:0;top:0;width:390px;height:752px;
+  filter:drop-shadow(0 2px 1.5px rgba(70,42,15,.38)) drop-shadow(0 6px 8px rgba(70,42,15,.18))}
+.paper{position:absolute;inset:0;background:var(--paper);overflow:hidden;
+  clip-path:polygon(0.0px 50.6px,6.5px 52.8px,13.0px 49.5px,19.5px 50.2px,26.0px 49.2px,32.5px 52.3px,39.0px 49.1px,45.5px 50.9px,52.0px 51.1px,58.5px 51.0px,65.0px 50.5px,71.5px 52.6px,78.0px 51.5px,84.5px 51.6px,91.0px 49.5px,97.5px 51.4px,104.0px 49.9px,110.5px 51.8px,117.0px 49.3px,123.5px 52.5px,130.0px 48.9px,136.5px 52.4px,143.0px 48.6px,149.5px 50.9px,156.0px 49.9px,162.5px 51.6px,169.0px 50.4px,175.5px 52.0px,182.0px 50.9px,188.5px 51.1px,195.0px 51.2px,201.5px 50.0px,208.0px 48.7px,214.5px 51.2px,221.0px 51.3px,227.5px 50.2px,234.0px 51.0px,240.5px 51.9px,247.0px 51.2px,253.5px 51.1px,260.0px 51.0px,266.5px 52.4px,273.0px 50.4px,279.5px 52.0px,286.0px 49.5px,292.5px 52.7px,299.0px 51.0px,305.5px 52.5px,312.0px 50.5px,318.5px 51.4px,325.0px 50.9px,331.5px 50.8px,338.0px 49.2px,344.5px 51.5px,351.0px 49.2px,357.5px 51.1px,364.0px 50.1px,370.5px 52.7px,377.0px 49.8px,383.5px 50.5px,390.0px 50.7px,390.0px 748.7px,380.3px 750.0px,370.5px 744.2px,360.8px 748.7px,351.0px 745.2px,341.3px 746.3px,331.5px 749.4px,321.8px 746.2px,312.0px 744.4px,302.3px 747.0px,292.5px 749.4px,282.8px 747.8px,273.0px 744.2px,263.3px 744.5px,253.5px 746.0px,243.8px 750.3px,234.0px 747.1px,224.3px 748.4px,214.5px 748.4px,204.8px 747.1px,195.0px 744.7px,185.3px 747.8px,175.5px 747.0px,165.8px 750.4px,156.0px 744.6px,146.3px 749.6px,136.5px 749.0px,126.8px 748.1px,117.0px 744.6px,107.3px 749.5px,97.5px 748.0px,87.8px 747.7px,78.0px 748.2px,68.3px 746.9px,58.5px 748.6px,48.8px 747.8px,39.0px 747.7px,29.3px 750.0px,19.5px 744.5px,9.8px 746.4px,0.0px 748.2px)}
+.paper::after{content:"";position:absolute;inset:0;pointer-events:none;
+  background:
+    url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='220' height='220'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3' seed='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 .36 0 0 0 0 .30 0 0 0 0 .20 .22 0 0 0 -.04'/></filter><rect width='220' height='220' filter='url(%23n)'/></svg>"),
+    radial-gradient(120% 90% at 50% 40%,transparent 60%,rgba(160,120,60,.10) 100%);
+  mix-blend-mode:multiply}
+.rules{position:absolute;left:0;right:0;top:96px;bottom:0;
+  background:repeating-linear-gradient(180deg,transparent 0 43px,var(--rule) 43px 44px)}
+.margin{position:absolute;top:0;bottom:0;left:61px;width:1.6px;background:var(--margin)}
+
+/* ---------- status bar ---------- */
+.status{position:absolute;left:0;right:0;top:0;height:54px}
+.status .time{position:absolute;left:34px;top:12px;font:700 25px/1 var(--hand);color:#2b1d10;letter-spacing:.5px}
+.status svg{position:absolute;right:22px;top:16px}
+
+/* ---------- header ---------- */
+h1{position:absolute;left:73px;top:81px;margin:0;font:400 60px/1 var(--marker);color:var(--dark);letter-spacing:.5px}
+.tape{position:absolute;left:263px;top:38px;width:150px;height:62px;transform:rotate(2.5deg);z-index:3;transform-origin:left center;
+  background:
+    repeating-linear-gradient(120deg,rgba(255,248,236,.38) 0 5px,transparent 5px 12px),
+    rgba(232,139,118,.80);
+  clip-path:polygon(2px 0,100% 0,100% 100%,2px 100%,6px 88%,0 76%,5px 63%,1px 50%,6px 37%,0 25%,4px 12%);
+  mix-blend-mode:multiply;
+  display:flex;flex-direction:column;align-items:flex-start;justify-content:center;padding:2px 0 0 20px;
+  font:700 31px/1 var(--hand);color:#2a211c}
+
+/* ---------- list ---------- */
+.list{position:absolute;left:0;right:0;top:140px;margin:0;padding:0;list-style:none}
+.row{position:relative;height:44px;padding:0 22px 0 76px;display:flex;align-items:flex-end;justify-content:space-between}
+.row .t{font:500 30px/1 var(--hand);color:var(--ink);padding-bottom:4px;position:relative;white-space:nowrap}
+.row .q{font:500 24px/1 var(--hand);color:var(--pencil);padding-bottom:6px;white-space:nowrap}
+.row .box{position:absolute;left:19px;bottom:6px;width:28px;height:28px}
+.row:nth-child(odd) .box{transform:rotate(-2deg)}
+.row:nth-child(3n) .box{transform:rotate(3deg)}
+
+.head .h{font:700 16px/1 var(--type);letter-spacing:.2em;text-transform:uppercase;color:var(--red);padding-bottom:10px}
+.head .h small{font:400 16px/1 var(--type);letter-spacing:.05em;color:var(--red);opacity:.85}
+.head .ic{position:absolute;left:17px;bottom:5px;width:32px;height:32px}
+
+.add .t{color:var(--pencil);font-weight:400}
+.add .plus{position:absolute;right:12px;bottom:0;width:48px;height:48px}
+
+.done .t{color:rgba(31,61,148,.62)}
+.done .strike path{stroke-opacity:.82}
+.done .strike{position:absolute;left:-6px;top:6px;width:calc(100% + 14px);height:18px;overflow:visible}
+
+/* ---------- tab bar ---------- */
+.tabs{position:absolute;left:0;right:0;top:752px;height:58px;display:flex;align-items:center;padding:0 18px}
+.tab{flex:1;height:44px;margin-top:4px;display:flex;align-items:center;justify-content:center;gap:8px;
+  font:600 26px/1 var(--hand);color:#3a2716}
+.tab svg{width:28px;height:28px}
+.tab.on{color:var(--dark)}
+.tab.on .label{position:relative;display:flex;align-items:center;gap:8px;padding:6px 16px 6px 12px;background:#fbf7ec;transform:rotate(-2.5deg);
+  clip-path:polygon(0 3px,6% 0,20% 2px,38% 0,55% 3px,72% 0,88% 2px,100% 0,99% 30%,100% 62%,98% 100%,80% 97%,62% 100%,44% 97%,26% 100%,10% 97%,0 100%,2px 55%);
+  box-shadow:0 1px 0 rgba(0,0,0,.1)}
+</style>
+</head>
+<body>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <symbol id="box-a" viewBox="0 0 28 28"><path d="M5.6 23.4C5.1 17 5.4 11 5 5.6C11 6.1 17 5.3 23.2 5.7M22.3 4.3C23 11 22.5 17 23.1 23C17 23.6 10.6 22.8 3.7 23.5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+    <symbol id="box-b" viewBox="0 0 28 28"><path d="M8 5.1C12.8 5.8 17.8 4.8 22.8 5.6C22.3 11.4 23.2 17.2 22.6 22.8C16.8 23.4 11 22.6 5.2 23.2C5.7 17.4 4.8 11.6 5.4 5.8C7.4 5.1 9.2 5.5 11.4 6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+    <symbol id="tick" viewBox="0 0 28 28"><path d="M7.6 14.2C9.4 15.6 10.8 17.6 12 20.4C14.4 13.8 19 7.2 26.5 1.8" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+  </defs>
+</svg>
+
+<div class="cover"></div>
+
+<div class="sheet">
+  <div class="paper">
+    <div class="rules"></div>
+    <div class="margin"></div>
+
+    <h1>Market</h1>
+
+    <ul class="list">
+      <!-- add -->
+      <li class="row add">
+        <svg class="box" viewBox="0 0 28 28" fill="none" stroke="#6c665d" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" style="transform:none">
+          <path d="M6.8 18.2L18.6 6.4L22.4 10.2L10.6 22Z"/>
+          <path d="M6.8 18.2L4.6 24.2L10.6 22"/>
+          <path d="M5.4 22L4.6 24.2L6.8 23.4Z" fill="#6c665d"/>
+          <path d="M18.6 6.4L20.6 4.4C21.3 3.7 22.2 3.7 22.9 4.4L24.4 5.9C25.1 6.6 25.1 7.5 24.4 8.2L22.4 10.2"/>
+          <path d="M17 8L20.8 11.8"/>
+        </svg>
+        <span class="t">Ne alacaksın?</span>
+        <svg class="plus" viewBox="0 0 48 48" fill="none" stroke="#bf3a2b" stroke-linecap="round" stroke-linejoin="round" aria-label="Ekle">
+          <path d="M34.5 10.8C28.4 6.2 16.6 6.8 11.6 13.6C7.4 19.4 9 30.6 17.6 34.4C25.8 38 35.2 33.6 37.4 25.4C39.2 18.8 35.4 11.6 27 9.2" stroke-width="2"/>
+          <path d="M23.4 15.6L23 30.4M15.8 23.2L30.6 22.6" stroke-width="2.4"/>
+        </svg>
+      </li>
+
+      <!-- Manav -->
+      <li class="row head">
+        <svg class="ic" viewBox="0 0 32 32" fill="none" stroke="#bf3a2b" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M16 11.2C9.6 10.6 5.4 15 6 20.4C6.6 26 11.8 28.4 16.6 28C22.4 27.6 26.6 23.8 26 18.4C25.4 13.6 21.8 11.4 16 11.2Z"/>
+          <path d="M16.2 11.4L13 7.6M16.2 11.4L19.6 7.4M16.2 11.4L11 11.6M16.2 11.4L21.4 11.2M16.2 11.2L16.8 5.2"/>
+          <path d="M10 18.4C10.4 16.6 11.4 15.6 12.8 15" stroke-width="1.3"/>
+        </svg>
+        <span class="h">Manav</span>
+      </li>
+      <li class="row"><svg class="box" style="color:var(--ink)"><use href="#box-a"/></svg><span class="t">Domates</span><span class="q">1 kg</span></li>
+      <li class="row"><svg class="box" style="color:var(--ink)"><use href="#box-b"/></svg><span class="t">Muz</span><span class="q">6 adet</span></li>
+
+      <!-- Kahvaltılık -->
+      <li class="row head">
+        <svg class="ic" viewBox="0 0 32 32" fill="none" stroke="#bf3a2b" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M10.4 9.4C9.8 13 12 15.2 11.8 17.6C11.6 20 9.6 21.8 10.2 25.4L21.8 25.4C22.4 21.8 20.4 20 20.2 17.6C20 15.2 22.2 13 21.6 9.4Z"/>
+          <path d="M11 13.4L21 13.4" stroke-width="1.3"/>
+          <path d="M6 27.6C12 29.6 20 29.6 26 27.6"/>
+          <path d="M14 7C15.4 5.6 13.2 4.4 14.4 2.8M18.2 7C19.6 5.6 17.4 4.4 18.6 2.8" stroke-width="1.3"/>
+        </svg>
+        <span class="h">Kahvaltılık</span>
+      </li>
+      <li class="row"><svg class="box" style="color:var(--ink)"><use href="#box-b"/></svg><span class="t">Süt</span><span class="q">2</span></li>
+      <li class="row"><svg class="box" style="color:var(--ink)"><use href="#box-a"/></svg><span class="t">Yumurta</span><span class="q">30'lu</span></li>
+
+      <!-- Temizlik -->
+      <li class="row head">
+        <svg class="ic" viewBox="0 0 32 32" fill="none" stroke="#bf3a2b" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="12" cy="20" r="7"/>
+          <circle cx="22.4" cy="12" r="4.6"/>
+          <circle cx="23.6" cy="23.4" r="3"/>
+          <path d="M8.6 17.6C9.2 16.2 10.2 15.4 11.4 15.2M20.4 10.4C20.8 9.6 21.4 9.2 22.2 9" stroke-width="1.2"/>
+          <path d="M11 5.6L11 9.6M9 7.6L13 7.6" stroke-width="1.3"/>
+        </svg>
+        <span class="h">Temizlik</span>
+      </li>
+      <li class="row"><svg class="box" style="color:var(--ink)"><use href="#box-a"/></svg><span class="t">Bulaşık deterjanı</span><span class="q"></span></li>
+
+      <li class="row"></li>
+
+      <!-- Alındı -->
+      <li class="row head">
+        <svg class="ic" viewBox="0 0 32 32" fill="none" stroke="#bf3a2b" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M7 12.2L25 11.6L23.4 27.4L8.8 27.8Z"/>
+          <path d="M11.6 12C11.4 7.8 13.4 5 16.2 5C19 5 20.8 7.6 20.6 11.8"/>
+          <path d="M12 19.4L15 22.6L20.4 16.4" stroke-width="1.9"/>
+        </svg>
+        <span class="h">Alındı <small>(2)</small></span>
+      </li>
+      <li class="row done">
+        <svg class="box" style="color:var(--ink-soft)"><use href="#box-b"/></svg>
+        <svg class="box" style="color:var(--ink)"><use href="#tick"/></svg>
+        <span class="t">Ekmek
+          <svg class="strike" viewBox="0 0 100 18" preserveAspectRatio="none"><path d="M1 11.5C22 9.6 52 10.4 99 7.4C72 10.6 38 12.6 5 14.6" fill="none" stroke="#1f3d94" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" vector-effect="non-scaling-stroke"/></svg>
+        </span><span class="q"></span>
+      </li>
+      <li class="row done">
+        <svg class="box" style="color:var(--ink-soft)"><use href="#box-a"/></svg>
+        <svg class="box" style="color:var(--ink)"><use href="#tick"/></svg>
+        <span class="t">Beyaz peynir
+          <svg class="strike" viewBox="0 0 100 18" preserveAspectRatio="none"><path d="M1 9.4C28 11.2 60 7.6 99 9.8C70 12.4 36 11.4 4 13.8" fill="none" stroke="#1f3d94" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" vector-effect="non-scaling-stroke"/></svg>
+        </span><span class="q"></span>
+      </li>
+    </ul>
+  </div>
+</div>
+
+<div class="status">
+  <span class="time">9:41</span>
+  <svg width="68" height="19" viewBox="0 0 62 17" fill="none" stroke="#2b1d10" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M2 13.2L2.1 11M6 13.1L5.9 9M10.1 13.2L10 6.4M14 13.1L14.2 3.8" stroke-width="2.2"/>
+    <path d="M20.6 7.6Q27 2.2 33.3 7.4M23.1 10Q27 6.6 30.8 9.9" stroke-width="1.9"/>
+    <circle cx="27" cy="12.6" r="1.3" fill="#2b1d10" stroke="none"/>
+    <path d="M38.2 4.4C44.2 3.9 50.5 4.4 57.6 4.1L57.9 12.9C50.3 13.2 44.1 12.7 38.3 13.1Z" stroke-width="1.5"/>
+    <path d="M59.8 7.1L59.9 10.4" stroke-width="1.8"/>
+    <path d="M40.3 11.3L42.5 6.1M43.5 11.3L45.7 6.1M46.7 11.3L48.9 6.1M49.9 11.3L52.1 6.1" stroke-width="1.3"/>
+  </svg>
+</div>
+
+
+<div class="tape">5 kaldı</div>
+
+<nav class="tabs">
+  <div class="tab on">
+    <span class="label">
+      <svg viewBox="0 0 28 28" fill="none" stroke="#28241f" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M3 11.6L25 11.2"/>
+        <path d="M4.4 11.6L7 24.4L21.2 24.2L23.6 11.4"/>
+        <path d="M8.2 11.4C9 5.6 11.4 3.4 14 3.4C16.8 3.4 19 5.8 19.8 11.2"/>
+        <path d="M9.6 14.6L10.4 21.4M14.1 14.6L14 21.6M18.6 14.6L17.8 21.4" stroke-width="1.4"/>
+      </svg>
+      Market
+    </span>
+  </div>
+  <div class="tab">
+    <svg viewBox="0 0 28 28" fill="none" stroke="#3a2716" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M14 3.2L16.9 10.2L24.4 10.8L18.6 15.6L20.6 23.2L14 19L7.4 23.4L9.4 15.6L3.6 10.8L11.1 10.4Z"/>
+    </svg>
+    İstekler
+  </div>
+</nav>
+
+</body>
+</html>

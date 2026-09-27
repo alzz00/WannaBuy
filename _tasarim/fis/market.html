@@ -1,0 +1,261 @@
+<!doctype html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=390, initial-scale=1">
+<title>Market Fişi</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Doto:wght,ROND@400..900,0..100&family=IBM+Plex+Mono:wght@400;500;600;700&family=JetBrains+Mono:wght@500;700;800&display=block">
+<style>
+:root{
+  --belt:#221f1c;
+  --paper:#f3eee2;
+  --paper-d:#e7e0d0;
+  --ink:#2f2a25;
+  --ink-2:#5b534a;
+  --ink-3:#7f7569;
+  --red:#c13f2b;
+  --mono:'IBM Plex Mono','JetBrains Mono',ui-monospace,monospace;
+  --dot:'Doto','IBM Plex Mono',monospace;
+  --noise:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 .36 0 0 0 0 .29 0 0 0 0 .2 .9 0 0 0 -.36'/%3E%3C/filter%3E%3Crect width='180' height='180' filter='url(%23n)'/%3E%3C/svg%3E");
+  --grunge:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='2' seed='7' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 -3 0 0 0 2.45'/%3E%3C/filter%3E%3Crect width='140' height='140' filter='url(%23g)'/%3E%3C/svg%3E");
+}
+*{box-sizing:border-box}
+html,body{width:390px;height:844px;margin:0;overflow:hidden}
+body{
+  position:relative;
+  font-family:var(--mono);
+  color:var(--ink);
+  background:
+    radial-gradient(120% 60% at 50% 30%, rgba(255,236,210,.07), transparent 65%),
+    repeating-linear-gradient(180deg, rgba(255,255,255,.05) 0 1px, rgba(0,0,0,.28) 1px 3px, transparent 3px 9px),
+    var(--belt);
+  -webkit-font-smoothing:antialiased;
+}
+button{font:inherit;color:inherit;background:none;border:0;padding:0;margin:0}
+
+/* ---------- status bar ---------- */
+.sb{position:absolute;inset:0 0 auto 0;height:54px;color:var(--paper);z-index:10}
+.sb .clock{position:absolute;left:34px;top:17px;font:600 17px/20px var(--mono);letter-spacing:.02em}
+.sb .ic{position:absolute;right:26px;top:20px;display:flex;gap:7px;align-items:center}
+.bm{display:inline-block;color:currentColor}
+.bm svg{display:block;width:100%;height:100%;overflow:visible}
+.bm circle{fill:currentColor}
+.bm .r{fill:var(--red)}
+.bat{width:27px;height:13px}
+
+/* ---------- printer slot ---------- */
+.slot{position:absolute;top:56px;left:9px;right:9px;height:14px;border-radius:7px;z-index:6;
+  background:linear-gradient(#070605,#15130f 70%,#24201b);
+  box-shadow:inset 0 2px 3px rgba(0,0,0,.95),0 1px 0 rgba(255,255,255,.1),0 -1px 0 rgba(0,0,0,.6)}
+
+/* ---------- receipt paper ---------- */
+.wrap{position:absolute;top:63px;left:18px;width:354px;z-index:3;
+  filter:drop-shadow(0 1px 0 rgba(0,0,0,.45)) drop-shadow(0 12px 12px rgba(0,0,0,.5))}
+.paper{position:relative;padding:21px 22px 21px;
+  background:
+    linear-gradient(180deg,rgba(40,25,10,.28),rgba(40,25,10,0) 18px),
+    linear-gradient(90deg,rgba(110,80,40,.07),transparent 9%,transparent 91%,rgba(110,80,40,.08)),
+    var(--noise),
+    var(--paper);
+  -webkit-mask:linear-gradient(#000 0 0) top/100% calc(100% - 9px) no-repeat,
+    conic-gradient(from -45deg at bottom,#0000,#000 1deg 89deg,#0000 90deg) bottom/14px 9px repeat-x;
+          mask:linear-gradient(#000 0 0) top/100% calc(100% - 9px) no-repeat,
+    conic-gradient(from -45deg at bottom,#0000,#000 1deg 89deg,#0000 90deg) bottom/14px 9px repeat-x;
+}
+
+.hd{display:flex;align-items:flex-end;justify-content:space-between}
+h1{margin:0;font-family:var(--dot);font-weight:900;font-size:50px;line-height:.9;letter-spacing:.01em;
+  font-variation-settings:"ROND" 100}
+.left{position:relative;font-weight:700;font-size:16px;letter-spacing:.1em;margin:0 6px 6px 0;white-space:nowrap}
+.left b{font-size:22px;letter-spacing:0;margin-right:5px}
+.left svg{position:absolute;left:-15px;top:-13px;width:calc(100% + 30px);height:calc(100% + 24px);overflow:visible}
+.pen{fill:none;stroke:var(--red);stroke-width:2.3;stroke-linecap:round;stroke-linejoin:round;opacity:.92}
+
+.meta{display:flex;justify-content:space-between;margin-top:10px;font-size:13px;letter-spacing:.12em;color:var(--ink-3)}
+.rule{height:2px;margin:12px 0 14px;background:repeating-linear-gradient(90deg,var(--ink-2) 0 7px,transparent 7px 11px);opacity:.75}
+
+/* add field */
+.add{display:flex;gap:10px;height:52px}
+.field{flex:1;display:flex;align-items:center;gap:9px;padding:0 14px;
+  background:radial-gradient(circle,rgba(47,42,37,.26) .75px,transparent 1px) 0 0/4px 4px, rgba(47,42,37,.03)}
+.field .p{color:var(--red);font-weight:700;font-size:18px}
+.field .cur{width:9px;height:22px;background:var(--ink)}
+.field .ph{font-size:16px;font-weight:500;letter-spacing:.06em;color:var(--ink-2)}
+.addb{width:52px;flex:none;background:var(--ink);color:var(--paper);display:grid;place-items:center}
+.addb .bm{width:22px;height:22px}
+
+/* groups */
+.grp{display:flex;align-items:center;gap:10px;height:30px;margin-top:10px}
+.grp .bm{width:26px;height:26px;flex:none}
+.grp .gt{font-weight:700;font-size:15px;letter-spacing:.16em}
+.grp .gr{flex:1;height:2px;background:repeating-linear-gradient(90deg,var(--ink-3) 0 2px,transparent 2px 5px)}
+
+.row{display:flex;align-items:center;height:46px;gap:14px}
+.box{width:22px;height:22px;flex:none;border:2px solid var(--ink);position:relative}
+.nm{position:relative;font-size:17px;font-weight:500;letter-spacing:.04em;white-space:nowrap}
+.ld{flex:1;height:4px;margin-top:9px;min-width:14px;
+  background:radial-gradient(circle,var(--ink-3) 1.1px,transparent 1.5px) 0 50%/7px 4px repeat-x}
+.qt{font-size:17px;font-weight:700;white-space:nowrap;letter-spacing:.02em}
+
+/* bought */
+.done-hd{display:flex;align-items:center;gap:12px;margin:10px 0 2px}
+.stamp{display:inline-flex;align-items:stretch;color:var(--red);border:2.5px solid var(--red);
+  font-weight:700;font-size:15px;letter-spacing:.2em;transform:rotate(-4deg);transform-origin:left center;
+  -webkit-mask:var(--grunge);mask:var(--grunge);opacity:.95}
+.stamp span{padding:5px 8px 4px 11px}
+.stamp span+span{border-left:2.5px solid var(--red);padding:5px 10px 4px 11px;letter-spacing:0}
+.row.done{height:44px}
+.row.done .nm{color:var(--ink-3)}
+.row.done .box{border-color:var(--ink-3)}
+.row.done .box svg{position:absolute;left:-3px;top:-9px;width:30px;height:30px;overflow:visible}
+.strike{position:absolute;left:-5px;width:calc(100% + 12px);top:50%;height:10px;margin-top:-4px;overflow:visible}
+
+/* ---------- tab strip ---------- */
+.tabwrap{position:absolute;left:0;right:0;bottom:0;z-index:4;filter:drop-shadow(0 -6px 10px rgba(0,0,0,.45))}
+.tabs{height:90px;padding:12px 16px 34px;display:flex;align-items:center;
+  background:var(--noise),var(--paper);
+  -webkit-mask:linear-gradient(#000 0 0) bottom/100% calc(100% - 8px) no-repeat,
+    conic-gradient(from 135deg at top,#0000,#000 1deg 89deg,#0000 90deg) top/14px 8px repeat-x;
+          mask:linear-gradient(#000 0 0) bottom/100% calc(100% - 8px) no-repeat,
+    conic-gradient(from 135deg at top,#0000,#000 1deg 89deg,#0000 90deg) top/14px 8px repeat-x}
+.tab{flex:1;height:44px;display:flex;align-items:center;justify-content:center;gap:10px;
+  font-weight:700;font-size:15px;letter-spacing:.16em;color:var(--ink-2)}
+.tab .bm{width:24px;height:24px}
+.tab.on{background:var(--ink);color:var(--paper)}
+.perf{width:0;height:38px;border-left:2px dotted var(--ink-3);margin:0 12px}
+</style>
+</head>
+<body>
+
+<div class="sb">
+  <span class="clock">9:41</span>
+  <div class="ic">
+    <span class="bm" data-bm="sig" style="width:19px;height:13px"></span>
+    <span class="bm" data-bm="wifi" style="width:17px;height:13px"></span>
+    <svg class="bat" viewBox="0 0 27 13"><rect x="1" y="1" width="22" height="11" fill="none" stroke="currentColor" stroke-width="1.6"/><rect x="24" y="4" width="2.2" height="5" fill="currentColor"/><rect x="3.2" y="3.2" width="4" height="6.6" fill="currentColor"/><rect x="8.4" y="3.2" width="4" height="6.6" fill="currentColor"/><rect x="13.6" y="3.2" width="4" height="6.6" fill="currentColor"/></svg>
+  </div>
+</div>
+
+<div class="slot"></div>
+
+<div class="wrap"><div class="paper">
+  <div class="hd">
+    <h1>MARKET</h1>
+    <div class="left"><b>5</b>KALDI
+      <svg viewBox="0 0 120 50" preserveAspectRatio="none"><path class="pen" d="M20 8 C 48 1, 104 2, 114 18 C 122 33, 92 46, 56 46 C 22 46, 3 38, 5 25 C 7 12, 34 5, 70 5"/></svg>
+    </div>
+  </div>
+  <div class="meta"><span>28.09.2026</span><span>09:41</span><span>#0005</span></div>
+  <div class="rule"></div>
+
+  <div class="add">
+    <div class="field"><span class="p">&gt;</span><span class="cur"></span><span class="ph">NE ALACAKSIN?</span></div>
+    <button class="addb" aria-label="Ekle"><span class="bm" data-bm="plus"></span></button>
+  </div>
+
+  <div class="grp"><span class="bm" data-bm="tomato"></span><span class="gt">MANAV</span><i class="gr"></i></div>
+  <div class="row"><span class="box"></span><span class="nm">DOMATES</span><i class="ld"></i><span class="qt">1 KG</span></div>
+  <div class="row"><span class="box"></span><span class="nm">MUZ</span><i class="ld"></i><span class="qt">6 ADET</span></div>
+
+  <div class="grp"><span class="bm" data-bm="egg"></span><span class="gt">KAHVALTILIK</span><i class="gr"></i></div>
+  <div class="row"><span class="box"></span><span class="nm">SÜT</span><i class="ld"></i><span class="qt">2</span></div>
+  <div class="row"><span class="box"></span><span class="nm">YUMURTA</span><i class="ld"></i><span class="qt">30'LU</span></div>
+
+  <div class="grp"><span class="bm" data-bm="bubbles"></span><span class="gt">TEMİZLİK</span><i class="gr"></i></div>
+  <div class="row"><span class="box"></span><span class="nm">BULAŞIK DETERJANI</span></div>
+
+  <div class="done-hd"><span class="stamp"><span>ALINDI</span><span>2</span></span></div>
+  <div class="row done"><span class="box"><svg viewBox="0 0 30 30"><path class="pen" d="M4 16 L11 23 C 15 14, 20 7, 28 2"/></svg></span>
+    <span class="nm">EKMEK<svg class="strike" viewBox="0 0 100 10" preserveAspectRatio="none"><path class="pen" d="M0 6 C 18 3, 34 7, 52 5 S 84 3, 100 5"/></svg></span></div>
+  <div class="row done"><span class="box"><svg viewBox="0 0 30 30"><path class="pen" d="M4 15 L11 22 C 15 13, 21 6, 28 3"/></svg></span>
+    <span class="nm">BEYAZ PEYNİR<svg class="strike" viewBox="0 0 100 10" preserveAspectRatio="none"><path class="pen" d="M0 4 C 20 7, 40 3, 60 5 S 88 7, 100 4"/></svg></span></div>
+</div></div>
+
+<div class="tabwrap"><nav class="tabs">
+  <button class="tab on"><span class="bm" data-bm="basket"></span>MARKET</button>
+  <i class="perf"></i>
+  <button class="tab"><span class="bm" data-bm="tag"></span>İSTEKLER</button>
+</nav></div>
+
+<script>
+/* dot-matrix bitmaps: '#' ink, 'r' accent */
+const B={
+  sig:["......#","....#.#","..#.#.#","#.#.#.#"].map(r=>r),
+  wifi:[".#####.","#.....#","..###..",".......","...#..."],
+  plus:["...##...","...##...","...##...","########","########","...##...","...##...","...##..."],
+  tomato:[
+    "....#.##...",
+    ".....###...",
+    "..###.###..",
+    ".#########.",
+    "###########",
+    "###########",
+    "###########",
+    "###########",
+    ".#########.",
+    ".#########.",
+    "..###.###.."],
+  egg:[
+    "..#..#..#...",
+    ".#..#..#....",
+    "..#..#..#...",
+    "............",
+    "#########...",
+    "##########..",
+    "#########.#.",
+    "#########.#.",
+    "##########..",
+    "#########...",
+    ".#######....",
+    "............"],
+  bubbles:[
+    ".######...#.",
+    ".#########.#",
+    ".######...#.",
+    "..##.##.....",
+    "..##..#.....",
+    ".####.......",
+    "######......",
+    "######......",
+    "######......",
+    "######......",
+    "######......",
+    "######......"],
+  basket:[
+    "....#..#....",
+    "...#....#...",
+    "..#......#..",
+    "############",
+    "############",
+    ".#.#.##.#.#.",
+    ".#.#.##.#.#.",
+    ".#.#.##.#.#.",
+    "..#.#..#.#..",
+    "..########..",
+    "............",
+    "............"],
+  tag:[
+    "......######",
+    ".....#######",
+    "....####..##",
+    "...#####..##",
+    "..##########",
+    ".##########.",
+    "##########..",
+    ".########...",
+    "..######....",
+    "...####.....",
+    "....##......",
+    "............"]
+};
+document.querySelectorAll('[data-bm]').forEach(el=>{
+  const rows=B[el.dataset.bm];const h=rows.length,w=Math.max(...rows.map(r=>r.length));
+  let s='<svg viewBox="0 0 '+w+' '+h+'" preserveAspectRatio="xMidYMid meet">';
+  rows.forEach((r,y)=>[...r].forEach((c,x)=>{if(c!=='.')s+='<circle'+(c==='r'?' class="r"':'')+' cx="'+(x+.5)+'" cy="'+(y+.5)+'" r=".43"/>';}));
+  el.innerHTML=s+'</svg>';
+});
+</script>
+</body>
+</html>

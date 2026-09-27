@@ -1,0 +1,330 @@
+<!doctype html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=390, initial-scale=1">
+<title>İstekler</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght,SOFT,WONK@0,9..144,100..900,0..100,0..1;1,9..144,100..900,0..100,0..1&family=Shrikhand&family=Bricolage+Grotesque:opsz,wdth,wght@12..96,75..100,200..800&display=swap" rel="stylesheet">
+<style>
+:root{
+  --cream:#F3E2BF;
+  --paper:#FCF3DF;
+  --mustard:#E3A52A;
+  --orange:#D5632A;
+  --rust:#A23D1F;
+  --choc:#3A2115;
+  --choc2:#6B4834;
+  --muted:#957659;
+}
+*{box-sizing:border-box}
+html,body{width:390px;height:844px;margin:0;overflow:hidden}
+body{
+  position:relative;
+  background:var(--cream);
+  color:var(--choc);
+  font-family:'Fraunces',Georgia,serif;
+  font-variation-settings:'SOFT' 100,'WONK' 0;
+  -webkit-font-smoothing:antialiased;
+}
+body::after{
+  content:"";position:absolute;inset:0;pointer-events:none;z-index:50;
+  opacity:.5;mix-blend-mode:multiply;
+  background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='220' height='220'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 .36  0 0 0 0 .22  0 0 0 0 .1  0 0 0 .32 0'/></filter><rect width='220' height='220' filter='url(%23n)'/></svg>");
+}
+
+/* ---------- status bar ---------- */
+.status{position:absolute;top:0;left:0;right:0;height:54px;z-index:5}
+.status .time{
+  position:absolute;left:34px;top:15px;
+  font-weight:700;font-size:17px;letter-spacing:.01em;
+  font-variation-settings:'SOFT' 100,'WONK' 0,'opsz' 20;
+}
+.status .icons{position:absolute;right:24px;top:19px}
+
+/* ---------- header ---------- */
+.swoosh{position:absolute;left:0;top:0;width:390px;height:200px;pointer-events:none}
+.title{
+  position:absolute;left:20px;top:74px;margin:0;
+  font-family:'Shrikhand',serif;font-weight:400;font-size:52px;line-height:1;
+  color:var(--choc);letter-spacing:.005em;
+  text-shadow:3px 3px 0 var(--orange),6px 6px 0 var(--mustard);
+}
+.sun{position:absolute;left:262px;top:52px;width:88px;height:88px;transform:rotate(-9deg)}
+.sun svg{position:absolute;inset:0}
+
+/* ---------- total ---------- */
+.total{
+  position:absolute;left:20px;right:20px;top:188px;height:54px;
+  border:2.5px solid var(--choc);border-radius:27px;background:var(--choc);
+  display:flex;align-items:center;justify-content:space-between;padding:0 24px 0 24px;
+}
+.total .k{font-style:italic;font-weight:500;font-size:18px;color:var(--mustard);
+  font-variation-settings:'SOFT' 100,'WONK' 1,'opsz' 18}
+.total .v{font-weight:900;font-size:27px;line-height:1;color:var(--paper);letter-spacing:-.005em;
+  font-variation-settings:'SOFT' 100,'WONK' 1,'opsz' 48}
+.total .v .tl{color:var(--mustard);margin-right:1px}
+
+/* ---------- filters ---------- */
+.filters{position:absolute;left:20px;right:20px;top:256px;height:44px;display:flex;align-items:center;justify-content:space-between}
+.chip{height:44px;display:flex;align-items:center;padding:0;font-weight:500;font-size:17px;
+  font-variation-settings:'SOFT' 100,'WONK' 0,'opsz' 17;color:var(--choc)}
+/* active = mustard, same as the active tab; chocolate text keeps ~7:1 contrast */
+.chip.on{padding:0 21px;border:2.5px solid var(--choc);border-radius:22px;background:var(--mustard);color:var(--choc);font-weight:700}
+/* invisible hit area so even "Ev" is >= 44px wide without changing the layout */
+.chip:not(.on){position:relative}
+.chip:not(.on)::before{content:"";position:absolute;top:0;bottom:0;left:-12px;right:-12px}
+.spark{flex:none}
+
+/* ---------- list ---------- */
+.list{position:absolute;left:20px;right:20px;top:314px}
+.gh{display:flex;align-items:center;height:28px;margin:0 0 6px 6px;gap:12px}
+.gh .lbl{
+  font-style:italic;font-weight:700;font-size:20px;line-height:1;
+  font-variation-settings:'SOFT' 100,'WONK' 1,'opsz' 24;
+}
+.gh .rule{flex:1;height:8px;margin-left:2px;
+  background:linear-gradient(var(--mustard) 0 2px,transparent 2px 3px,var(--orange) 3px 5px,transparent 5px 6px,var(--rust) 6px 8px);
+  border-radius:2px;opacity:.9}
+.grp{margin-bottom:12px}
+.wr{
+  height:78px;border:2.5px solid var(--choc);border-radius:38px;background:var(--paper);
+  display:flex;align-items:center;padding:0 20px 0 5.5px;margin-bottom:8px;
+}
+.th{width:60px;height:60px;border-radius:50%;border:2.5px solid var(--choc);overflow:hidden;flex:none}
+.th svg{display:block;width:100%;height:100%}
+.info{flex:1;min-width:0;margin-left:13px}
+.nm{font-weight:600;font-size:18px;line-height:1.15;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;
+  font-variation-settings:'SOFT' 100,'WONK' 0,'opsz' 18}
+.sub{display:flex;align-items:baseline;justify-content:space-between;margin-top:5px}
+.st{font-family:'Bricolage Grotesque',sans-serif;font-weight:500;font-size:16px;color:var(--choc2);
+  font-variation-settings:'wdth' 90,'opsz' 16}
+.pr{flex:none;margin-left:10px;font-weight:800;font-size:21px;line-height:1;
+  font-variation-settings:'SOFT' 100,'WONK' 1,'opsz' 30}
+.pr .tl{color:var(--rust);font-size:.86em;margin-right:1px}
+
+/* ---------- tab bar ---------- */
+/* 92px bar: stripes 752-761, tabs 764-808, bottom 34px safe area left clear */
+.tabbar{position:absolute;left:0;right:0;bottom:0;height:92px;z-index:4;
+  background:linear-gradient(var(--mustard) 0 3px,var(--orange) 3px 6px,var(--rust) 6px 9px,var(--choc) 9px)}
+.tabs{display:flex;height:44px;margin-top:12px}
+.tab{flex:1;display:flex;align-items:center;justify-content:center;gap:10px;
+  font-style:italic;font-weight:600;font-size:17px;color:rgba(243,226,191,.62);
+  font-variation-settings:'SOFT' 100,'WONK' 1,'opsz' 18}
+.tab .ic{width:36px;height:36px;border-radius:50%;display:grid;place-items:center}
+.tab.on{color:var(--mustard)}
+.tab.on .ic{background:var(--mustard)}
+.home{position:absolute;left:128px;bottom:8px;width:134px;height:5px;border-radius:3px;background:rgba(243,226,191,.75)}
+</style>
+</head>
+<body>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <path id="rays" d="M32 36L24.17 -23.49L39.83 -23.49ZM32 36L54.96 -19.43L68.53 -11.6ZM32 36L79.6 -0.53L87.43 13.04ZM32 36L91.49 28.17L91.49 43.83ZM32 36L87.43 58.96L79.6 72.53ZM32 36L68.53 83.6L54.96 91.43ZM32 36L39.83 95.49L24.17 95.49ZM32 36L9.04 91.43L-4.53 83.6ZM32 36L-15.6 72.53L-23.43 58.96ZM32 36L-27.49 43.83L-27.49 28.17ZM32 36L-23.43 13.04L-15.6 -0.53ZM32 36L-4.53 -11.6L9.04 -19.43Z"/>
+  </defs>
+</svg>
+
+<!-- status bar -->
+<div class="status">
+  <div class="time">9:41</div>
+  <svg class="icons" width="74" height="14" viewBox="0 0 74 14" aria-hidden="true">
+    <g fill="#3A2115">
+      <rect x="0" y="9" width="3.4" height="4.5" rx="1.7"/>
+      <rect x="5" y="6.5" width="3.4" height="7" rx="1.7"/>
+      <rect x="10" y="4" width="3.4" height="9.5" rx="1.7"/>
+      <rect x="15" y="1.5" width="3.4" height="12" rx="1.7"/>
+    </g>
+    <g fill="none" stroke-linecap="round" stroke-width="2.2">
+      <path d="M26 6.2a10 10 0 0 1 14 0" stroke="#A23D1F"/>
+      <path d="M28.6 8.8a6.2 6.2 0 0 1 8.8 0" stroke="#D5632A"/>
+      <path d="M31.3 11.4a2.4 2.4 0 0 1 3.4 0" stroke="#E3A52A"/>
+    </g>
+    <rect x="46" y="1.5" width="24" height="11.5" rx="5.75" fill="none" stroke="#3A2115" stroke-width="1.6"/>
+    <rect x="48.4" y="3.9" width="17" height="6.7" rx="3.35" fill="#3A2115"/>
+    <path d="M71.8 5.3v4" stroke="#3A2115" stroke-width="1.8" stroke-linecap="round"/>
+  </svg>
+</div>
+
+<svg class="swoosh" viewBox="0 0 390 200" aria-hidden="true">
+  <g fill="none" stroke-width="8" stroke-linecap="round">
+    <path d="M-10 148H306A52 52 0 0 0 358 96V80" stroke="#E3A52A"/>
+    <path d="M-10 159H306A63 63 0 0 0 369 96V80" stroke="#D5632A"/>
+    <path d="M-10 170H306A74 74 0 0 0 380 96V80" stroke="#A23D1F"/>
+  </g>
+</svg>
+
+<h1 class="title">İstekler</h1>
+
+<div class="sun">
+  <svg viewBox="0 0 100 100" width="88" height="88" aria-hidden="true">
+    <polygon points="50,4 55.76,9.91 62.96,5.86 66.82,13.16 74.87,11.3 76.52,19.39 84.76,19.88 84.07,28.1 91.84,30.89 88.86,38.59 95.53,43.45 90.5,50 95.53,56.55 88.86,61.41 91.84,69.11 84.07,71.9 84.76,80.12 76.52,80.61 74.87,88.7 66.82,86.84 62.96,94.14 55.76,90.09 50,96 44.24,90.09 37.04,94.14 33.18,86.84 25.13,88.7 23.48,80.61 15.24,80.12 15.93,71.9 8.16,69.11 11.14,61.41 4.47,56.55 9.5,50 4.47,43.45 11.14,38.59 8.16,30.89 15.93,28.1 15.24,19.88 23.48,19.39 25.13,11.3 33.18,13.16 37.04,5.86 44.24,9.91" fill="#E3A52A" stroke="#3A2115" stroke-width="2.6" stroke-linejoin="round"/>
+    <circle cx="50" cy="50" r="34" fill="none" stroke="#3A2115" stroke-width="1.4"/>
+    <path d="M50 69C36 59.5 30.5 52.5 30.5 45 30.5 39.3 34.6 35 40 35c4.2 0 7.6 2.4 10 6.2 2.4-3.8 5.8-6.2 10-6.2 5.4 0 9.5 4.3 9.5 10 0 7.5-5.5 14.5-19.5 24z" fill="#D5632A" stroke="#3A2115" stroke-width="3" stroke-linejoin="round"/>
+    <path d="M37.5 42.5c.8-1.8 2.2-2.8 4-3" fill="none" stroke="#FCF3DF" stroke-width="2.6" stroke-linecap="round"/>
+  </svg>
+</div>
+
+<div class="total">
+  <span class="k">Toplam</span>
+  <span class="v"><span class="tl">₺</span>12.740</span>
+</div>
+
+<div class="filters">
+  <span class="chip on">Hepsi</span>
+  <svg class="spark" width="12" height="12" viewBox="0 0 12 12" aria-hidden="true"><path d="M6 0C6.6 3.6 8.4 5.4 12 6 8.4 6.6 6.6 8.4 6 12 5.4 8.4 3.6 6.6 0 6 3.6 5.4 5.4 3.6 6 0z" fill="#D5632A"/></svg>
+  <span class="chip">Giyim</span>
+  <svg class="spark" width="12" height="12" viewBox="0 0 12 12" aria-hidden="true"><path d="M6 0C6.6 3.6 8.4 5.4 12 6 8.4 6.6 6.6 8.4 6 12 5.4 8.4 3.6 6.6 0 6 3.6 5.4 5.4 3.6 6 0z" fill="#E3A52A"/></svg>
+  <span class="chip">Ev</span>
+  <svg class="spark" width="12" height="12" viewBox="0 0 12 12" aria-hidden="true"><path d="M6 0C6.6 3.6 8.4 5.4 12 6 8.4 6.6 6.6 8.4 6 12 5.4 8.4 3.6 6.6 0 6 3.6 5.4 5.4 3.6 6 0z" fill="#A23D1F"/></svg>
+  <span class="chip">Teknoloji</span>
+</div>
+
+<div class="list">
+
+  <div class="grp">
+    <div class="gh">
+      <svg width="26" height="26" viewBox="0 0 26 26" aria-hidden="true">
+        <polygon points="13,2 15.47,5.39 19.47,4.1 19.47,8.3 23.46,9.6 21,13 23.46,16.4 19.47,17.7 19.47,21.9 15.47,20.61 13,24 10.53,20.61 6.53,21.9 6.53,17.7 2.54,16.4 5,13 2.54,9.6 6.53,8.3 6.53,4.1 10.53,5.39" fill="#E3A52A" stroke="#3A2115" stroke-width="1.8" stroke-linejoin="round"/>
+        <circle cx="13" cy="13" r="4.6" fill="#D5632A" stroke="#3A2115" stroke-width="1.8"/>
+      </svg>
+      <span class="lbl">Öncelikli</span><span class="rule"></span>
+    </div>
+
+    <div class="wr">
+      <span class="th">
+        <!-- sneaker -->
+        <svg viewBox="0 0 64 64" aria-hidden="true">
+          <rect width="64" height="64" fill="#E3A52A"/>
+          <use href="#rays" fill="#EDBC56"/>
+          <g transform="translate(0 -2)">
+          <path d="M8.5 42.5H56V45c0 3-2 4.8-5 4.8H13.5c-3 0-5-1.8-5-4.8z" fill="#6B4834" stroke="#3A2115" stroke-width="2" stroke-linejoin="round"/>
+          <path d="M9 42.5c0-5 3.6-7.4 9.4-8.4 4.8-.8 8-3.8 10.8-8.6l1.6-2.8c.8-1.3 2.3-1.5 3.3-.4l2 2.2c2.4 2.6 6.4 3.4 10.6 2.8l3.4-.5c2.4-.3 4.2 1.4 4.6 3.6.6 3.6.6 8.2.4 12.1z" fill="#FCF3DF" stroke="#3A2115" stroke-width="2" stroke-linejoin="round"/>
+          <path d="M30.5 41.5l8.6-10.8M35.6 41.5l8.6-10.8" stroke="#D5632A" stroke-width="2.8" stroke-linecap="round"/>
+          <path d="M20.5 35.6l2.6 2.4M24 32.8l2.6 2.4M27 29.6l2.6 2.4" stroke="#3A2115" stroke-width="1.7" stroke-linecap="round"/>
+          <path d="M51 28.4v7" stroke="#3A2115" stroke-width="1.7" stroke-linecap="round"/>
+          <path d="M16.5 42.3c.4-2.6 2-4.2 4.4-5" fill="none" stroke="#3A2115" stroke-width="1.6" stroke-linecap="round"/>
+          </g>
+        </svg>
+      </span>
+      <div class="info">
+        <div class="nm">Beyaz spor ayakkabı</div>
+        <div class="sub"><span class="st">Zara</span><span class="pr"><span class="tl">₺</span>2.499</span></div>
+      </div>
+    </div>
+
+    <div class="wr">
+      <span class="th">
+        <!-- trench coat -->
+        <svg viewBox="0 0 64 64" aria-hidden="true">
+          <rect width="64" height="64" fill="#D5632A"/>
+          <use href="#rays" fill="#DF7C45"/>
+          <g stroke="#3A2115" stroke-width="2" stroke-linejoin="round" stroke-linecap="round">
+            <path d="M20 16.5c-3.4 1.4-4.6 4.8-5 9.5l-1.8 20.5h5L20.6 28z" fill="#DDB57A"/>
+            <path d="M44 16.5c3.4 1.4 4.6 4.8 5 9.5l1.8 20.5h-5L43.4 28z" fill="#DDB57A"/>
+            <path d="M22.5 13.2L27.5 11 32 17l4.5-6 5 2.2c2 .9 3 2.6 3.2 5.2L46.8 58H17.2l2.1-39.6c.2-2.6 1.2-4.3 3.2-5.2z" fill="#DDB57A"/>
+            <path d="M27.5 11l-3.4 6.6 5.4 5.6L32 17M36.5 11l3.4 6.6-5.4 5.6L32 17" fill="#E9C893"/>
+            <path d="M34.6 23.4V58" fill="none"/>
+            <path d="M18.6 32.4h26.8v4.4H18.6z" fill="#A23D1F"/>
+            <rect x="31.4" y="31.4" width="6.4" height="6.4" rx="1.2" fill="#E3A52A"/>
+          </g>
+          <g fill="#3A2115">
+            <circle cx="29.2" cy="27" r="1.2"/><circle cx="38.6" cy="27" r="1.2"/>
+            <circle cx="29.2" cy="42.5" r="1.2"/><circle cx="38.6" cy="42.5" r="1.2"/>
+          </g>
+        </svg>
+      </span>
+      <div class="info">
+        <div class="nm">Trençkot</div>
+        <div class="sub"><span class="st">Mango</span><span class="pr"><span class="tl">₺</span>3.990</span></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="grp">
+    <div class="gh">
+      <svg width="26" height="26" viewBox="0 0 26 26" aria-hidden="true">
+        <path d="M15.6 3.2A9.6 9.6 0 1 0 22.8 17 7.6 7.6 0 0 1 15.6 3.2z" fill="#FCF3DF" stroke="#3A2115" stroke-width="1.9" stroke-linejoin="round"/>
+        <path d="M20 5.2l.7 1.6 1.6.7-1.6.7-.7 1.6-.7-1.6-1.6-.7 1.6-.7z" fill="#A23D1F"/>
+      </svg>
+      <span class="lbl">Bekleyebilir</span><span class="rule"></span>
+    </div>
+
+    <div class="wr">
+      <span class="th">
+        <!-- coffee machine -->
+        <svg viewBox="0 0 64 64" aria-hidden="true">
+          <rect width="64" height="64" fill="#A23D1F"/>
+          <use href="#rays" fill="#B24F2E"/>
+          <g stroke="#3A2115" stroke-width="2" stroke-linejoin="round" stroke-linecap="round">
+            <rect x="17" y="11" width="30" height="44" rx="4.5" fill="#FCF3DF"/>
+            <path d="M17 21.5h30" fill="none"/>
+            <rect x="21.5" y="25.5" width="21" height="22" rx="2" fill="#6B4834"/>
+            <rect x="27.5" y="25.5" width="9" height="4.2" rx="1" fill="#FCF3DF"/>
+            <path d="M25.6 37.5h10.6v5.4c0 2.6-1.8 4.3-4.4 4.3h-1.8c-2.6 0-4.4-1.7-4.4-4.3z" fill="#E3A52A"/>
+            <path d="M36.2 39.2c3.2-.2 3.2 4.6 0 4.4" fill="none"/>
+            <path d="M15.5 51h33" fill="none"/>
+          </g>
+          <circle cx="40.5" cy="16.2" r="2.4" fill="#D5632A" stroke="#3A2115" stroke-width="1.6"/>
+          <path d="M22.5 16.2h8" stroke="#3A2115" stroke-width="1.8" stroke-linecap="round"/>
+          <path d="M32 31.5v3.2" stroke="#E3A52A" stroke-width="1.8" stroke-linecap="round" stroke-dasharray="1.2 2"/>
+        </svg>
+      </span>
+      <div class="info">
+        <div class="nm">Kahve makinesi</div>
+        <div class="sub"><span class="st">Trendyol</span><span class="pr"><span class="tl">₺</span>4.251</span></div>
+      </div>
+    </div>
+
+    <div class="wr">
+      <span class="th">
+        <!-- headphones -->
+        <svg viewBox="0 0 64 64" aria-hidden="true">
+          <rect width="64" height="64" fill="#6B4834"/>
+          <use href="#rays" fill="#7B5540"/>
+          <path d="M16.5 39V33c0-9.6 7-16.4 15.5-16.4S47.5 23.4 47.5 33v6" fill="none" stroke="#3A2115" stroke-width="7.4" stroke-linecap="round"/>
+          <path d="M16.5 39V33c0-9.6 7-16.4 15.5-16.4S47.5 23.4 47.5 33v6" fill="none" stroke="#FCF3DF" stroke-width="3.2" stroke-linecap="round"/>
+          <g stroke="#3A2115" stroke-width="2" stroke-linejoin="round">
+            <rect x="10.5" y="33" width="11" height="18" rx="5.5" fill="#E3A52A"/>
+            <rect x="42.5" y="33" width="11" height="18" rx="5.5" fill="#E3A52A"/>
+            <rect x="19" y="35.5" width="5.4" height="13" rx="2.7" fill="#D5632A"/>
+            <rect x="39.6" y="35.5" width="5.4" height="13" rx="2.7" fill="#D5632A"/>
+          </g>
+        </svg>
+      </span>
+      <div class="info">
+        <div class="nm">Kulaklık</div>
+        <div class="sub"><span class="st">Hepsiburada</span><span class="pr"><span class="tl">₺</span>2.000</span></div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<nav class="tabbar">
+  <div class="tabs">
+    <div class="tab">
+      <span class="ic">
+        <svg width="24" height="24" viewBox="0 0 24 24" aria-hidden="true">
+          <path d="M7 10c0-3.6 2.2-5.6 5-5.6s5 2 5 5.6" fill="none" stroke="rgba(243,226,191,.62)" stroke-width="2.2" stroke-linecap="round"/>
+          <path d="M2.8 10h18.4l-2 9.4c-.2 1-1 1.6-2 1.6H6.8c-1 0-1.8-.6-2-1.6z" fill="none" stroke="rgba(243,226,191,.62)" stroke-width="2.2" stroke-linejoin="round"/>
+          <path d="M9 13.5v4M12 13.5v4M15 13.5v4" stroke="rgba(243,226,191,.62)" stroke-width="2" stroke-linecap="round"/>
+        </svg>
+      </span>
+      <span>Market</span>
+    </div>
+    <div class="tab on">
+      <span class="ic">
+        <svg width="24" height="24" viewBox="0 0 24 24" aria-hidden="true">
+          <path d="M12 20.2C5.6 15.8 3 12.4 3 8.9 3 6.2 5 4.2 7.6 4.2c1.9 0 3.4 1 4.4 2.7 1-1.7 2.5-2.7 4.4-2.7 2.6 0 4.6 2 4.6 4.7 0 3.5-2.6 6.9-9 11.3z" fill="#FCF3DF" stroke="#3A2115" stroke-width="2.2" stroke-linejoin="round"/>
+        </svg>
+      </span>
+      <span>İstekler</span>
+    </div>
+  </div>
+  <div class="home"></div>
+</nav>
+
+</body>
+</html>
