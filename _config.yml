@@ -1,0 +1,5 @@
+# GitHub Pages ayarı: bu dosyalar yayına çıkmaz. _tasarim/ alt çizgiyle başladığı için zaten çıkmaz.
+exclude:
+  - CLAUDE.md
+  - BENIOKU.md
+  - araclar
