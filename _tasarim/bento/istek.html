@@ -1,0 +1,149 @@
+<!doctype html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=390, initial-scale=1">
+<title>İstekler</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@400;500;600;700&family=Onest:wght@400;500;600&display=swap&subset=latin-ext" rel="stylesheet">
+<style>
+:root{
+  --bg:#0C0C0E;
+  --tile:#1D1D21;
+  --tile2:#26262B;
+  --txt:#F4F2EE;
+  --mute:#A3A09A;
+  --lime:#C9F53B;
+  --orange:#FF5B1F;
+  --cobalt:#2D4BF5;
+  --pink:#FF7BC8;
+  --violet:#6C4BFF;
+  --ink:#0C0C0E;
+  --disp:"Unbounded","Onest",sans-serif;
+  --body:"Onest",sans-serif;
+  --r:24px;
+  --gap:6px;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{width:390px;height:844px;margin:0;overflow:hidden}
+body{background:var(--bg);color:var(--txt);font-family:var(--body);-webkit-font-smoothing:antialiased;position:relative}
+
+.status{position:absolute;top:0;left:0;right:0;height:54px;display:flex;align-items:center;justify-content:space-between;padding:6px 28px 0 36px}
+.time{font-family:var(--body);font-weight:600;font-size:17px}
+
+.grid{position:absolute;top:58px;left:12px;right:12px;display:grid;grid-template-columns:repeat(6,1fr);gap:var(--gap);
+  grid-template-rows:104px 92px 52px 201px 201px;
+  grid-template-areas:"ti ti ti ti ti ti" "to to to to to to" "f1 f1 f2 f2 f3 f3" "a a a a b b" "c c d d d d"}
+.t{border-radius:var(--r);position:relative;overflow:hidden}
+.title{grid-area:ti;background:var(--tile);padding:0 20px 18px;display:flex;align-items:flex-end;justify-content:space-between}
+.title h1{font-family:var(--disp);font-weight:600;font-size:40px;line-height:1;letter-spacing:-.02em}
+.title span{font-size:16px;color:var(--mute);font-weight:500;padding-bottom:4px}
+.total{grid-area:to;background:var(--lime);color:var(--ink);display:flex;align-items:center;justify-content:space-between;padding:0 20px}
+.total small{font-size:16px;font-weight:600}
+.total b{font-family:var(--disp);font-weight:700;font-size:44px;letter-spacing:-.04em;line-height:1}
+.filters{grid-column:1/-1;grid-row:3;display:grid;grid-template-columns:repeat(4,1fr);gap:var(--gap)}
+.filters a{border-radius:18px;background:var(--tile);color:var(--txt);display:grid;place-items:center;text-decoration:none;font-size:16px;font-weight:500}
+.filters a.on{background:var(--txt);color:var(--ink);font-weight:600}
+
+.item{padding:14px 16px 16px;display:flex;flex-direction:column}
+.tag{display:flex;align-items:center;gap:6px;font-family:var(--disp);font-size:12px;font-weight:600;letter-spacing:.04em;text-transform:uppercase}
+.item h3{font-size:18px;font-weight:600;line-height:1.15}
+.item .st{font-size:15px;font-weight:500;opacity:.8;margin-top:2px}
+.item .p{font-family:var(--disp);font-weight:700;letter-spacing:-.03em;line-height:1}
+.item .art{flex:none}
+.wide .body{margin-top:auto;display:flex;align-items:flex-end;justify-content:space-between;gap:8px}
+.wide .p{font-size:30px}
+.wide .art{position:absolute;right:10px;top:8px}
+.narrow .art{margin:6px auto 0}
+.narrow .body{margin-top:auto}
+.narrow .p{font-size:20px;margin-top:8px}
+
+.a{grid-area:a;background:var(--orange);color:var(--ink)}
+.b{grid-area:b;background:var(--pink);color:var(--ink)}
+.c{grid-area:c;background:var(--violet);color:#fff}
+.d{grid-area:d;background:var(--cobalt);color:#fff}
+
+/* tabs */
+.tabs{position:absolute;left:12px;right:12px;bottom:30px;height:64px;display:grid;grid-template-columns:1fr 1fr;gap:var(--gap)}
+.tabs a{border-radius:20px;display:flex;align-items:center;justify-content:center;gap:10px;text-decoration:none;font-family:var(--disp);font-weight:500;font-size:14px;color:var(--mute);background:var(--tile)}
+.tabs a.on{background:var(--txt);color:var(--ink)}
+.home{position:absolute;bottom:8px;left:50%;width:134px;height:5px;margin-left:-67px;border-radius:3px;background:var(--txt)}
+</style>
+</head>
+<body>
+
+<div class="status">
+  <span class="time">9:41</span>
+  <svg width="74" height="14" viewBox="0 0 74 14" fill="none">
+    <g fill="#F4F2EE"><rect x="1" y="9" width="2.4" height="3.6" rx=".6"/><rect x="5.2" y="6.6" width="2.4" height="6" rx=".6"/><rect x="9.4" y="4.2" width="2.4" height="8.4" rx=".6"/><rect x="13.6" y="1.6" width="2.4" height="11" rx=".6"/></g>
+    <g stroke="#F4F2EE" stroke-width="1.6" stroke-linecap="round"><path d="M28.2 9.6a3.3 3.3 0 0 1 4.6 0"/><path d="M25.7 7.1a6.8 6.8 0 0 1 9.6 0"/><path d="M23.2 4.6a10.3 10.3 0 0 1 14.6 0"/></g>
+    <circle cx="30.5" cy="12" r="1.2" fill="#F4F2EE"/>
+    <rect x="45.5" y="1.8" width="24" height="10.6" rx="3" stroke="#F4F2EE" stroke-opacity=".5" stroke-width="1"/>
+    <rect x="47.5" y="3.8" width="17" height="6.6" rx="1.6" fill="#F4F2EE"/>
+    <path d="M71.6 5.6v3" stroke="#F4F2EE" stroke-opacity=".5" stroke-width="1.6" stroke-linecap="round"/>
+  </svg>
+</div>
+
+<main class="grid">
+  <header class="t title"><h1>İstekler</h1><span>4 ürün</span></header>
+  <div class="t total"><small>Toplam</small><b>₺12.740</b></div>
+  <nav class="filters"><a class="on" href="#">Hepsi</a><a href="#">Giyim</a><a href="#">Ev</a><a href="#">Teknoloji</a></nav>
+
+  <article class="t item wide a">
+    <span class="tag"><svg width="12" height="12" viewBox="0 0 12 12"><path d="M6 1l5 9H1z" fill="currentColor"/></svg>Öncelikli</span>
+    <svg class="art" width="128" height="128" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5">
+      <path d="M4 33.5c0-3.6 1.4-6 3.2-8.6l4.6-7c1-1.5 3-1.6 4.1-.2l2.6 3.3c2.2 2.6 5.3 4 8.6 4.5l9.4 1.4c4.3.7 7.5 3.1 7.5 6.8V38H4z"/>
+      <path d="M4 38.5h40"/><path d="M4 34.5h40" opacity=".5"/>
+      <path d="M17.5 21l3.2-2M19.8 24l3.2-2M22.6 26.6l3.2-2"/>
+      <path d="M8 26.5c2.5 0 4.5 1.5 5.5 4"/>
+    </svg>
+    <div class="body"><div><h3>Beyaz spor<br>ayakkabı</h3><div class="st">Zara</div></div><b class="p">₺2.499</b></div>
+  </article>
+  <article class="t item narrow b">
+    <span class="tag"><svg width="12" height="12" viewBox="0 0 12 12"><path d="M6 1l5 9H1z" fill="currentColor"/></svg>Öncelikli</span>
+    <svg class="art" width="80" height="80" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8">
+      <path d="M18 5l-8 3.5L7 42h11l6-20 6 20h11L38 8.5 30 5"/>
+      <path d="M18 5l6 11 6-11"/><path d="M18 5l-2 9 4 3M30 5l2 9-4 3"/>
+      <path d="M8.5 27h31"/><rect x="21.5" y="25" width="5" height="4" rx="1"/>
+      <circle cx="20" cy="20.5" r=".9"/><circle cx="28" cy="20.5" r=".9"/><circle cx="20" cy="33" r=".9"/><circle cx="28" cy="33" r=".9"/>
+    </svg>
+    <div class="body"><h3>Trençkot</h3><div class="st">Mango</div><b class="p">₺3.990</b></div>
+  </article>
+  <article class="t item narrow c">
+    <span class="tag"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>Bekler</span>
+    <svg class="art" width="80" height="80" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8">
+      <path d="M9 30v-6a15 15 0 0 1 30 0v6"/>
+      <path d="M12.5 24a11.5 11.5 0 0 1 23 0" opacity=".5"/>
+      <rect x="6" y="27" width="9" height="14" rx="3.5"/><rect x="33" y="27" width="9" height="14" rx="3.5"/>
+    </svg>
+    <div class="body"><h3>Kulaklık</h3><div class="st">Hepsiburada</div><b class="p">₺2.000</b></div>
+  </article>
+  <article class="t item wide d">
+    <span class="tag"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>Bekleyebilir</span>
+    <svg class="art" width="124" height="124" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5">
+      <path d="M12 5h24a2 2 0 0 1 2 2v34a2 2 0 0 1-2 2H12a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2z"/>
+      <path d="M10 15h28M10 38h28"/>
+      <path d="M20 15v3.5h8V15"/>
+      <path d="M18.5 27h11v5.5a3 3 0 0 1-3 3h-5a3 3 0 0 1-3-3z"/><path d="M29.5 28.5h1.5a2 2 0 0 1 0 4h-1.5"/>
+      <path d="M22.5 21.5v2.5M25.5 21.5v2.5" opacity=".6"/>
+      <circle cx="31.5" cy="10" r="1.6"/><path d="M15 10h7"/>
+    </svg>
+    <div class="body"><div><h3>Kahve<br>makinesi</h3><div class="st">Trendyol</div></div><b class="p">₺4.251</b></div>
+  </article>
+</main>
+
+<nav class="tabs">
+  <a href="#">
+    <svg width="22" height="22" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 8h6l5 24h22l4-16H14"/><circle cx="19" cy="40" r="2.6"/><circle cx="36" cy="40" r="2.6"/></svg>
+    Market
+  </a>
+  <a class="on" href="#">
+    <svg width="22" height="22" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"><path d="M24 40S7 30 7 18a8.5 8.5 0 0 1 17-2 8.5 8.5 0 0 1 17 2c0 12-17 22-17 22z"/></svg>
+    İstekler
+  </a>
+</nav>
+<div class="home"></div>
+
+</body>
+</html>

@@ -43,14 +43,18 @@ h1{padding-top:16px;font-weight:900;font-stretch:125%;font-size:66px;line-height
 
 /* list */
 .list{position:absolute;top:298px;left:var(--m);right:var(--m);list-style:none}
-.list li{display:grid;grid-template-columns:116px 1fr;height:104px;align-items:center}
+.list li{display:grid;grid-template-columns:116px 1fr;height:106px;align-items:center}
 .list li + li{border-top:1px solid var(--hair)}
 .pic{width:76px;height:76px;color:var(--ink)}
-.txt{display:grid;grid-template-columns:1fr auto;row-gap:10px;align-items:baseline}
+.txt{display:grid;grid-template-columns:1fr auto;grid-template-rows:auto auto auto;row-gap:8px;align-items:center}
+.nm{grid-column:1/-1}
+.st{grid-row:2}
+.pri{grid-row:3;grid-column:1}
+.pr{grid-row:2/4;grid-column:2;align-self:end}
 .nm{font-size:18px;font-weight:600;letter-spacing:-.005em;white-space:nowrap}
-.pr{font-weight:850;font-stretch:112%;font-size:22px;letter-spacing:-.02em;text-align:right}
+.pr{font-weight:850;font-stretch:112%;font-size:28px;line-height:.9;letter-spacing:-.03em;text-align:right}
 .st{font-weight:700;font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--ink2)}
-.pri{display:flex;align-items:center;gap:7px;font-weight:600;font-size:13px;justify-self:end}
+.pri{display:flex;align-items:center;gap:7px;font-weight:600;font-size:14px}
 .pri::before{content:"";width:10px;height:10px;background:var(--sig)}
 .pri.wait{color:var(--mute)}
 .pri.wait::before{background:transparent;box-shadow:inset 0 0 0 1.6px var(--mute)}
@@ -103,8 +107,8 @@ h1{padding-top:16px;font-weight:900;font-stretch:125%;font-size:66px;line-height
       <path d="M14 40h14"/>
     </svg>
     <div class="txt">
-      <span class="nm">Beyaz spor ayakkabı</span><span class="pr">₺2.499</span>
-      <span class="st">Zara</span><span class="pri">Öncelikli</span>
+      <span class="nm">Beyaz spor ayakkabı</span>
+      <span class="st">Zara</span><span class="pri">Öncelikli</span><span class="pr">₺2.499</span>
     </div>
   </li>
   <li>
@@ -118,8 +122,8 @@ h1{padding-top:16px;font-weight:900;font-stretch:125%;font-size:66px;line-height
       <path d="M36 35.5h6v5h-6z"/>
     </svg>
     <div class="txt">
-      <span class="nm">Trençkot</span><span class="pr">₺3.990</span>
-      <span class="st">Mango</span><span class="pri">Öncelikli</span>
+      <span class="nm">Trençkot</span>
+      <span class="st">Mango</span><span class="pri">Öncelikli</span><span class="pr">₺3.990</span>
     </div>
   </li>
   <li>
@@ -133,8 +137,8 @@ h1{padding-top:16px;font-weight:900;font-stretch:125%;font-size:66px;line-height
       <circle cx="42" cy="13" r="2.2"/>
     </svg>
     <div class="txt">
-      <span class="nm">Kahve makinesi</span><span class="pr">₺4.251</span>
-      <span class="st">Trendyol</span><span class="pri wait">Bekleyebilir</span>
+      <span class="nm">Kahve makinesi</span>
+      <span class="st">Trendyol</span><span class="pri wait">Bekleyebilir</span><span class="pr">₺4.251</span>
     </div>
   </li>
   <li>
@@ -144,8 +148,8 @@ h1{padding-top:16px;font-weight:900;font-stretch:125%;font-size:66px;line-height
       <path d="M13 42v8M51 42v8"/>
     </svg>
     <div class="txt">
-      <span class="nm">Kulaklık</span><span class="pr">₺2.000</span>
-      <span class="st">Hepsiburada</span><span class="pri wait">Bekleyebilir</span>
+      <span class="nm">Kulaklık</span>
+      <span class="st">Hepsiburada</span><span class="pri wait">Bekleyebilir</span><span class="pr">₺2.000</span>
     </div>
   </li>
 </ul>
