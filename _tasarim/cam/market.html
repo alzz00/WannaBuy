@@ -75,8 +75,8 @@ h1{font-family:var(--display);font-weight:650;font-size:46px;line-height:1;lette
 /* ---------- list ---------- */
 .list{position:absolute;z-index:2;top:210px;left:16px;right:16px}
 .panel{border-radius:28px;padding:8px 18px 6px}
-.panel + .panel{margin-top:10px}
-h2{display:flex;align-items:center;gap:10px;height:36px;font-family:var(--display);font-weight:600;font-size:15px;letter-spacing:.01em;color:var(--ink2)}
+.panel + .panel{margin-top:9px}
+h2{display:flex;align-items:center;gap:10px;height:34px;font-family:var(--display);font-weight:600;font-size:15px;letter-spacing:.01em;color:var(--ink2)}
 h2 .ic{width:30px;height:30px;border-radius:50%;display:grid;place-items:center;background:rgba(255,255,255,.55);box-shadow:inset 0 1px 0 #fff,0 1px 3px rgba(90,30,40,.12)}
 ul{list-style:none}
 li{display:flex;align-items:center;gap:14px;height:46px}
@@ -86,12 +86,12 @@ li{display:flex;align-items:center;gap:14px;height:46px}
 .qty{font-size:16px;color:var(--ink2);font-variant-numeric:tabular-nums}
 
 /* ---------- done ---------- */
-.done{margin-top:14px;padding:0 4px}
-h3{display:flex;align-items:center;gap:8px;height:28px;font-family:var(--display);font-weight:600;font-size:15px;color:var(--ink2)}
+.done{margin-top:10px;border-radius:26px;padding:6px 18px 4px;background:linear-gradient(160deg,rgba(255,248,244,.34),rgba(255,240,236,.22))}
+h3{display:flex;align-items:center;gap:8px;height:32px;font-family:var(--display);font-weight:600;font-size:15px;color:var(--ink2)}
 h3 em{font-style:normal;width:24px;height:24px;border-radius:50%;display:grid;place-items:center;font-size:13px;background:rgba(255,255,255,.4);box-shadow:inset 0 1px 0 rgba(255,255,255,.8)}
-.done li{height:44px;padding-left:14px}
+.done li{height:42px}
 .tick{flex:none;width:26px;height:26px;border-radius:50%;display:grid;place-items:center;background:rgba(255,255,255,.45);box-shadow:inset 0 1px 0 #fff}
-.done .name{color:rgba(42,21,32,.62);text-decoration:line-through;text-decoration-thickness:1.5px;text-decoration-color:rgba(42,21,32,.45)}
+.done .name{color:#6A4957;text-decoration:line-through;text-decoration-thickness:1.5px;text-decoration-color:rgba(106,73,87,.7)}
 
 /* ---------- tab bar ---------- */
 .tabs{position:absolute;z-index:3;bottom:22px;left:50%;width:250px;margin-left:-125px;height:64px;border-radius:32px;display:flex;padding:5px;
@@ -168,7 +168,7 @@ h3 em{font-style:normal;width:24px;height:24px;border-radius:50%;display:grid;pl
     </ul>
   </section>
 
-  <section class="done">
+  <section class="done glass">
     <h3>Alındı <em>2</em></h3>
     <ul>
       <li><span class="tick"><svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="#C8472F" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2.5 7.4l3 3 6-6.6"/></svg></span><span class="name">Ekmek</span></li>
