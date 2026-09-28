@@ -53,7 +53,7 @@ Yayın: GitHub Pages, https://alzz00.github.io/WannaBuy/ (adres büyük/küçük
   (varsayılan Gün batımı) ve isteklere link eklenebilmesini.
 - Uygulama yapıldı (dal `tasarim-modern`): `index.html` (temalar `[data-tema]` CSS değişkenleri, `wb.market`,
   `wb.istekler`, `wb.ayarlar`), `sw.js`, `manifest.webmanifest`, `ikonlar/`. Ekran görüntüleri `_tasarim/uygulama/`,
-  özet `ozet.png`. Gerçek iPhone'da denenmedi. Kullanıcı "yükle" deyince `main`'e al (PR aç, Merge).
+  özet `ozet.png`. Gerçek iPhone'da denenmedi. 2026-09-28 kullanıcı "yükle" dedi, `main`'e alındı (yayında).
 
 ## Teknik kararlar
 
