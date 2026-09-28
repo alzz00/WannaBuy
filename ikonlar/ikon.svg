@@ -1,0 +1,36 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512">
+  <defs>
+    <radialGradient id="g1" cx=".6" cy=".65" r=".5"><stop offset="0" stop-color="#EE7555"/><stop offset="1" stop-color="#D9573D"/></radialGradient>
+    <radialGradient id="g2" cx=".35" cy=".4" r=".5"><stop offset="0" stop-color="#F8BC77"/><stop offset="1" stop-color="#EE9950"/></radialGradient>
+    <radialGradient id="g3" cx=".7" cy=".4" r=".5"><stop offset="0" stop-color="#9B587F"/><stop offset="1" stop-color="#6E3659"/></radialGradient>
+    <radialGradient id="g4" cx=".4" cy=".3" r=".5"><stop offset="0" stop-color="#EE8C6C"/><stop offset="1" stop-color="#D96A50"/></radialGradient>
+    <filter id="b" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="18"/></filter>
+    <filter id="bb" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="34"/></filter>
+    <linearGradient id="cam" x1="0" y1="0" x2=".6" y2="1"><stop offset="0" stop-color="#FFFAF6" stop-opacity=".62"/><stop offset="1" stop-color="#FFF4EE" stop-opacity=".38"/></linearGradient>
+    <linearGradient id="rim" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#fff" stop-opacity=".95"/><stop offset=".32" stop-color="#fff" stop-opacity=".15"/><stop offset=".55" stop-color="#fff" stop-opacity="0"/><stop offset=".88" stop-color="#fff" stop-opacity=".55"/><stop offset="1" stop-color="#fff" stop-opacity=".9"/></linearGradient>
+    <linearGradient id="tus" x1=".3" y1="0" x2=".7" y2="1"><stop offset="0" stop-color="#E0664B"/><stop offset="1" stop-color="#B93E29"/></linearGradient>
+    <clipPath id="kutu"><rect x="104" y="104" width="304" height="304" rx="96"/></clipPath>
+    <g id="alan">
+      <rect width="512" height="512" fill="#F1E3D6"/>
+      <circle cx="120" cy="110" r="200" fill="url(#g1)" opacity=".92"/>
+      <circle cx="470" cy="300" r="170" fill="url(#g2)" opacity=".95"/>
+      <circle cx="60" cy="520" r="210" fill="url(#g3)" opacity=".85"/>
+      <circle cx="440" cy="560" r="150" fill="url(#g4)" opacity=".85"/>
+      <circle cx="330" cy="120" r="90" fill="#F6C08F" opacity=".8"/>
+    </g>
+  </defs>
+  <g filter="url(#b)"><use href="#alan"/></g>
+  <!-- cam: arka plan daha çok bulanık görünür -->
+  <g clip-path="url(#kutu)">
+    <g filter="url(#bb)"><use href="#alan"/></g>
+    <rect x="104" y="104" width="304" height="304" fill="url(#cam)"/>
+  </g>
+  <rect x="104" y="104" width="304" height="304" rx="96" fill="none" stroke="#fff" stroke-opacity=".9" stroke-width="3"/>
+  <rect x="105.5" y="105.5" width="301" height="301" rx="94.5" fill="none" stroke="url(#rim)" stroke-width="5"/>
+  <!-- sepet + kalp -->
+  <g transform="translate(256 262)" fill="none" stroke="#C8472F" stroke-width="13" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M-104 -20h208l-22 106a18 18 0 0 1-17.6 14.4h-128.8A18 18 0 0 1-82 86z" fill="#E8674B" fill-opacity=".2"/>
+    <path d="M-52 20v44M0 20v44M52 20v44" stroke-width="11"/>
+    <path d="M0 -40c-9-22-50-26-50 2 0 20 30 36 50 50 20-14 50-30 50-50 0-28-41-24-50-2z" fill="url(#tus)" stroke="#B93E29" stroke-width="8"/>
+  </g>
+</svg>

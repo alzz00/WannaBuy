@@ -49,9 +49,11 @@ Yayın: GitHub Pages, https://alzz00.github.io/WannaBuy/ (adres büyük/küçük
   5. **Cihaz** (`cihaz`): Teenage Engineering tarzı gri panel, turuncu 7 segment ekran, kaydırmalı anahtarlar, Chivo + Chivo Mono.
   Kullanıcı **Cam**'ı seçti, renk seçenekleri istedi.
 - Cam renkleri (`_tasarim/cam-<renk>/`, liste `liste-cam.json`, görsel `cam-renkler.png`): 1 Gün batımı (`cam`),
-  2 Okyanus, 3 Lavanta, 4 Narenciye, 5 Gece (koyu). Kullanıcı birini seçecek.
-- Sıradaki: seçilen yönle uygulamayı yap (`index.html` + `sw.js` + `manifest.webmanifest` + `ikonlar/`), görsellerini göster,
-  "yükle" gelince yayınla. Şu an `index.html` sadece "yakında" sayfası.
+  2 Okyanus, 3 Lavanta, 4 Narenciye, 5 Gece (koyu). Kullanıcı hepsinin ayarlardan seçilebilir mod olmasını istedi
+  (varsayılan Gün batımı) ve isteklere link eklenebilmesini.
+- Uygulama yapıldı (dal `tasarim-modern`): `index.html` (temalar `[data-tema]` CSS değişkenleri, `wb.market`,
+  `wb.istekler`, `wb.ayarlar`), `sw.js`, `manifest.webmanifest`, `ikonlar/`. Ekran görüntüleri `_tasarim/uygulama/`,
+  özet `ozet.png`. Gerçek iPhone'da denenmedi. Kullanıcı "yükle" deyince `main`'e al (PR aç, Merge).
 
 ## Teknik kararlar
 
