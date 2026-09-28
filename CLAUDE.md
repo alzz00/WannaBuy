@@ -47,7 +47,9 @@ Yayın: GitHub Pages, https://alzz00.github.io/WannaBuy/ (adres büyük/küçük
   3. **Bento** (`bento`): siyah zemin, canlı renkli kutucuk ızgarası, Unbounded + Onest.
   4. **İsviçre** (`isvicre`): kırık beyaz, siyah, cıva kırmızısı; dev geniş Archivo, iki sütun ızgara.
   5. **Cihaz** (`cihaz`): Teenage Engineering tarzı gri panel, turuncu 7 segment ekran, kaydırmalı anahtarlar, Chivo + Chivo Mono.
-  Kullanıcı birini seçecek (ya da karıştıracak).
+  Kullanıcı **Cam**'ı seçti, renk seçenekleri istedi.
+- Cam renkleri (`_tasarim/cam-<renk>/`, liste `liste-cam.json`, görsel `cam-renkler.png`): 1 Gün batımı (`cam`),
+  2 Okyanus, 3 Lavanta, 4 Narenciye, 5 Gece (koyu). Kullanıcı birini seçecek.
 - Sıradaki: seçilen yönle uygulamayı yap (`index.html` + `sw.js` + `manifest.webmanifest` + `ikonlar/`), görsellerini göster,
   "yükle" gelince yayınla. Şu an `index.html` sadece "yakında" sayfası.
 
